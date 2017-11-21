@@ -71,7 +71,8 @@ Public Class Registro
         Master.Cargo = dtEmpleado.Rows(0)("Cargo")
         Master.CargoId = dtEmpleado.Rows(0)("CargoId")
 
-        Dim adAuth As LdapAuthentication = New LdapAuthentication("")
+        'Dim adAuth As LdapAuthentication = New LdapAuthentication("")
+        Dim adAuth As New HorasExtras.Wsl.Seguridad()
         Master.procesar = adAuth.MenuProcesar(Master.areaId, Master.DepId, Master.CargoId)
         Master.sesionIni = True
 

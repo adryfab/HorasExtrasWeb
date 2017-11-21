@@ -101,6 +101,11 @@
     <Content Include="icons\regresar.ico" />
     <Content Include="images\1844A.png" />
     <Content Include="script\jquery-1.5.2.min.js" />
+    <None Include="Web References\HorasExtras.Wsl\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\HorasExtras.Wsl\Seguridad.disco" />
     <Content Include="Wui\Aprobacion.aspx" />
     <Content Include="Wui\ImprimirRegistro.aspx" />
     <Content Include="Wui\Login.aspx" />
@@ -109,7 +114,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bll\LdapAuthentication.vb" />
+    <Compile Include="Web References\HorasExtras.Wsl\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Wui\Aprobacion.aspx.designer.vb">
       <DependentUpon>Aprobacion.aspx</DependentUpon>
     </Compile>
@@ -195,6 +204,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="Web References\HorasExtras.Wsl\Seguridad.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -202,7 +212,25 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:55269/Seguridad.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HorasExtras.Wsl\</RelPath>
+      <UpdateFromURL>http://localhost:55269/Seguridad.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>HorasExtrasWeb_HorasExtras_Wsl_Seguridad</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
