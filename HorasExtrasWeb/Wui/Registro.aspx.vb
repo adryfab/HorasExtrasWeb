@@ -50,6 +50,7 @@ Public Class Registro
         Session("dtBiometrico") = dtBiometrico
         BindDataGrid()
         Totales()
+
     End Sub
 
     Private Sub DatosEmpleado(ByVal dtEmpleado As DataTable)
@@ -79,6 +80,10 @@ Public Class Registro
 
         CompFechaIni.ValueToCompare = Master.Inicio
         ComFechFin.ValueToCompare = Master.Fin
+
+        customCalendarExtender.StartDate = Master.Inicio
+        customCalendarExtender.EndDate = Master.Fin
+        customCalendarExtender.SelectedDate = Master.Inicio
     End Sub
 
     Private Function GrabarRegistros(ByVal rows As DataRow) As Integer

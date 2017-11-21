@@ -77,6 +77,15 @@ Partial Public Class Registro
     Protected WithEvents MaskedEditExtender1 As Global.AjaxControlToolkit.MaskedEditExtender
     
     '''<summary>
+    '''Control customCalendarExtender.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents customCalendarExtender As Global.AjaxControlToolkit.CalendarExtender
+    
+    '''<summary>
     '''Control Label2.
     '''</summary>
     '''<remarks>

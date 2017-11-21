@@ -90,12 +90,14 @@
                     <asp:TextBox ID="FechaTxt" runat="server" Width="100px"/>
                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                     <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" Mask="99/99/9999" MaskType="Date" TargetControlID="FechaTxt" />
+                    <ajaxToolkit:CalendarExtender ID="customCalendarExtender" runat="server" TargetControlID="FechaTxt"
+                        Format="dd/MM/yyyy" PopupPosition="Left" />
                 </td>
                 <td class="w3-small">
                     <asp:Label ID="Label2" runat="server" Text="Ingreso:"/>
                 </td>
                 <td>
-                    <asp:TextBox ID="IngresoTxt" runat="server" onkeyup="mascara(this,':',patron,true)" Width="60px" />
+                    <asp:TextBox ID="IngresoTxt" runat="server" onkeyup="mascara(this,':',patron,true)" Width="60px"/>                    
                 </td>
                 <td class="w3-small">
                     <asp:Label ID="Label3" runat="server" Text="Salida:"/>
