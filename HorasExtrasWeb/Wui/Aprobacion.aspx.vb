@@ -12,7 +12,8 @@
 #Region "Manejo de Datos"
 
     Private Sub Llenar_Grid()
-        Dim SQLConexionBD As New SQLConexionBD()
+        'Dim SQLConexionBD As New SQLConexionBD()
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dtEmpleado As New DataTable
         Dim dsTablas As New DataSet
         Dim dtAprobaciones As New DataTable
@@ -86,7 +87,8 @@
 
             If btn.ID = "ButtonAprobar" Then
                 'Validar Si están todos los registros justificados
-                Dim SQLConexionBD As New SQLConexionBD()
+                'Dim SQLConexionBD As New SQLConexionBD()
+                Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
                 If SQLConexionBD.ValidarJustificacion(rows.Item("NOMINA_ID")) = False Then
                     'Mostrar mensaje
                     id01.Visible = True
@@ -128,7 +130,8 @@
     End Sub
 
     Private Function GrabarRegistros(ByVal rows As DataRow) As Integer
-        Dim SQLConexionBD As New SQLConexionBD()
+        'Dim SQLConexionBD As New SQLConexionBD()
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim Resultados As Integer
         Dim infoXlm As String = infoXML(rows)
         Resultados = SQLConexionBD.GrabarAprobacion(infoXlm)
@@ -140,14 +143,11 @@
 
         cadenaXML &= "<APROBA "
         cadenaXML &= "CODEMP=""" & row.Item("NOMINA_ID").ToString & """ "
-        'cadenaXML &= "ANIOPE=""" & lblAnio.Text & """ "
         cadenaXML &= "ANIOPE=""" & Master.Año & """ "
-        'cadenaXML &= "PERIOD=""" & lblPeriodo.Text & """ "
         cadenaXML &= "PERIOD=""" & Master.Periodo & """ "
         cadenaXML &= "HORA50=""" & row.Item("SUPLEMENTARIAS").ToString & """ "
         cadenaXML &= "HOR100=""" & row.Item("EXTRAORDINARIAS").ToString & """ "
         cadenaXML &= "SUPERV=""" & row.Item("SUPERVISOR").ToString & """ "
-        'cadenaXML &= "USUARI=""" & lblUsuario.Text & """ "
         cadenaXML &= "USUARI=""" & Master.usuario & """ "
         cadenaXML &= "USUSUP=""" & row.Item("UsuarioSuper").ToString & """ "
         If row.Item("FechaSuper") IsNot System.DBNull.Value Then
@@ -169,7 +169,8 @@
     End Function
 
     Private Sub Llenar_Grid_Detalle(ByVal index As Integer, ByVal user As String)
-        Dim SQLConexionBD As New SQLConexionBD()
+        'Dim SQLConexionBD As New SQLConexionBD()
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dtBiometrico As New DataTable
         Dim dsTablas As New DataSet
 
@@ -182,7 +183,6 @@
     Private Sub BindDataGridDetalle(ByVal index As Integer)
         gvBiometrico.DataSource = Session("dtBiometrico")
         gvBiometrico.DataBind()
-        'trmostrar.Visible = Not trmostrar.Visible
         id01.Visible = False
         id01.Style.Item("display") = "none"
 

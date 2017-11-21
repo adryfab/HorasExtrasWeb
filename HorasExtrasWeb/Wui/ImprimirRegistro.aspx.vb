@@ -15,7 +15,8 @@
     End Sub
 
     Private Sub LlenarGrid()
-        Dim SQLConexionBD As New SQLConexionBD()
+        'Dim SQLConexionBD As New SQLConexionBD()
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dsTablas As New DataSet
         Dim dtFechas As New DataTable
         Dim dtEmpleado As New DataTable
@@ -137,7 +138,6 @@
             minTot050 = min050 - minPer
         Else
             horTot050 = hor050 - horPer - 1
-            'minTot050 = ((min050 - (minPer + 60)) + 60) * (-1)
             minTot050 = (minPer - (min050 + 60)) * (-1)
         End If
 
@@ -161,7 +161,6 @@
             minTot100 = min100 - minRec
         Else
             horTot100 = hor100 - horRec - 1
-            'minTot100 = ((min100 - (minRec + 60)) + 60) * (-1)
             minTot100 = (minRec - (min100 + 60)) * (-1)
         End If
 

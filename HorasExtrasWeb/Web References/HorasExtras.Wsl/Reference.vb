@@ -13,6 +13,7 @@ Option Explicit On
 
 Imports System
 Imports System.ComponentModel
+Imports System.Data
 Imports System.Diagnostics
 Imports System.Web.Services
 Imports System.Web.Services.Protocols
@@ -34,6 +35,30 @@ Namespace HorasExtras.Wsl
         Private ValidarCredencialesOperationCompleted As System.Threading.SendOrPostCallback
         
         Private MenuProcesarOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private RecuperarDatosBiometricoPorUsuarioOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private RecuperarDatosEmpleadoOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private GrabarRegistoOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private EliminarRegistroOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private ActualizarTotalesOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private ValidarFeriadosOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private RecuperarAprobacionesOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private ValidarJustificacionOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private GrabarAprobacionOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private RecuperarImprimirOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private RecuperarProcesarOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private TotalesProcesarOperationCompleted As System.Threading.SendOrPostCallback
         
         Private useDefaultCredentialsSetExplicitly As Boolean
         
@@ -78,6 +103,42 @@ Namespace HorasExtras.Wsl
         
         '''<remarks/>
         Public Event MenuProcesarCompleted As MenuProcesarCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event RecuperarDatosBiometricoPorUsuarioCompleted As RecuperarDatosBiometricoPorUsuarioCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event RecuperarDatosEmpleadoCompleted As RecuperarDatosEmpleadoCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event GrabarRegistoCompleted As GrabarRegistoCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event EliminarRegistroCompleted As EliminarRegistroCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event ActualizarTotalesCompleted As ActualizarTotalesCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event ValidarFeriadosCompleted As ValidarFeriadosCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event RecuperarAprobacionesCompleted As RecuperarAprobacionesCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event ValidarJustificacionCompleted As ValidarJustificacionCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event GrabarAprobacionCompleted As GrabarAprobacionCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event RecuperarImprimirCompleted As RecuperarImprimirCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event RecuperarProcesarCompleted As RecuperarProcesarCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event TotalesProcesarCompleted As TotalesProcesarCompletedEventHandler
         
         '''<remarks/>
         <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/ValidarCredenciales", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
@@ -133,6 +194,330 @@ Namespace HorasExtras.Wsl
             If (Not (Me.MenuProcesarCompletedEvent) Is Nothing) Then
                 Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
                 RaiseEvent MenuProcesarCompleted(Me, New MenuProcesarCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/RecuperarDatosBiometricoPorUsuario", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function RecuperarDatosBiometricoPorUsuario(ByVal user As String) As System.Data.DataSet
+            Dim results() As Object = Me.Invoke("RecuperarDatosBiometricoPorUsuario", New Object() {user})
+            Return CType(results(0),System.Data.DataSet)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub RecuperarDatosBiometricoPorUsuarioAsync(ByVal user As String)
+            Me.RecuperarDatosBiometricoPorUsuarioAsync(user, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub RecuperarDatosBiometricoPorUsuarioAsync(ByVal user As String, ByVal userState As Object)
+            If (Me.RecuperarDatosBiometricoPorUsuarioOperationCompleted Is Nothing) Then
+                Me.RecuperarDatosBiometricoPorUsuarioOperationCompleted = AddressOf Me.OnRecuperarDatosBiometricoPorUsuarioOperationCompleted
+            End If
+            Me.InvokeAsync("RecuperarDatosBiometricoPorUsuario", New Object() {user}, Me.RecuperarDatosBiometricoPorUsuarioOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnRecuperarDatosBiometricoPorUsuarioOperationCompleted(ByVal arg As Object)
+            If (Not (Me.RecuperarDatosBiometricoPorUsuarioCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent RecuperarDatosBiometricoPorUsuarioCompleted(Me, New RecuperarDatosBiometricoPorUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/RecuperarDatosEmpleado", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function RecuperarDatosEmpleado(ByVal user As String) As System.Data.DataSet
+            Dim results() As Object = Me.Invoke("RecuperarDatosEmpleado", New Object() {user})
+            Return CType(results(0),System.Data.DataSet)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub RecuperarDatosEmpleadoAsync(ByVal user As String)
+            Me.RecuperarDatosEmpleadoAsync(user, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub RecuperarDatosEmpleadoAsync(ByVal user As String, ByVal userState As Object)
+            If (Me.RecuperarDatosEmpleadoOperationCompleted Is Nothing) Then
+                Me.RecuperarDatosEmpleadoOperationCompleted = AddressOf Me.OnRecuperarDatosEmpleadoOperationCompleted
+            End If
+            Me.InvokeAsync("RecuperarDatosEmpleado", New Object() {user}, Me.RecuperarDatosEmpleadoOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnRecuperarDatosEmpleadoOperationCompleted(ByVal arg As Object)
+            If (Not (Me.RecuperarDatosEmpleadoCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent RecuperarDatosEmpleadoCompleted(Me, New RecuperarDatosEmpleadoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/GrabarRegisto", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function GrabarRegisto(ByVal user As String, ByVal infoXml As String) As Integer
+            Dim results() As Object = Me.Invoke("GrabarRegisto", New Object() {user, infoXml})
+            Return CType(results(0),Integer)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub GrabarRegistoAsync(ByVal user As String, ByVal infoXml As String)
+            Me.GrabarRegistoAsync(user, infoXml, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub GrabarRegistoAsync(ByVal user As String, ByVal infoXml As String, ByVal userState As Object)
+            If (Me.GrabarRegistoOperationCompleted Is Nothing) Then
+                Me.GrabarRegistoOperationCompleted = AddressOf Me.OnGrabarRegistoOperationCompleted
+            End If
+            Me.InvokeAsync("GrabarRegisto", New Object() {user, infoXml}, Me.GrabarRegistoOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnGrabarRegistoOperationCompleted(ByVal arg As Object)
+            If (Not (Me.GrabarRegistoCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent GrabarRegistoCompleted(Me, New GrabarRegistoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/EliminarRegistro", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function EliminarRegistro(ByVal user As String, ByVal infoXml As String) As Integer
+            Dim results() As Object = Me.Invoke("EliminarRegistro", New Object() {user, infoXml})
+            Return CType(results(0),Integer)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub EliminarRegistroAsync(ByVal user As String, ByVal infoXml As String)
+            Me.EliminarRegistroAsync(user, infoXml, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub EliminarRegistroAsync(ByVal user As String, ByVal infoXml As String, ByVal userState As Object)
+            If (Me.EliminarRegistroOperationCompleted Is Nothing) Then
+                Me.EliminarRegistroOperationCompleted = AddressOf Me.OnEliminarRegistroOperationCompleted
+            End If
+            Me.InvokeAsync("EliminarRegistro", New Object() {user, infoXml}, Me.EliminarRegistroOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnEliminarRegistroOperationCompleted(ByVal arg As Object)
+            If (Not (Me.EliminarRegistroCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent EliminarRegistroCompleted(Me, New EliminarRegistroCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/ActualizarTotales", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function ActualizarTotales(ByVal user As String, ByVal infoXml As String) As Integer
+            Dim results() As Object = Me.Invoke("ActualizarTotales", New Object() {user, infoXml})
+            Return CType(results(0),Integer)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub ActualizarTotalesAsync(ByVal user As String, ByVal infoXml As String)
+            Me.ActualizarTotalesAsync(user, infoXml, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub ActualizarTotalesAsync(ByVal user As String, ByVal infoXml As String, ByVal userState As Object)
+            If (Me.ActualizarTotalesOperationCompleted Is Nothing) Then
+                Me.ActualizarTotalesOperationCompleted = AddressOf Me.OnActualizarTotalesOperationCompleted
+            End If
+            Me.InvokeAsync("ActualizarTotales", New Object() {user, infoXml}, Me.ActualizarTotalesOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnActualizarTotalesOperationCompleted(ByVal arg As Object)
+            If (Not (Me.ActualizarTotalesCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent ActualizarTotalesCompleted(Me, New ActualizarTotalesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/ValidarFeriados", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function ValidarFeriados(ByVal fecha As Date, ByVal localidad As Integer) As Boolean
+            Dim results() As Object = Me.Invoke("ValidarFeriados", New Object() {fecha, localidad})
+            Return CType(results(0),Boolean)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub ValidarFeriadosAsync(ByVal fecha As Date, ByVal localidad As Integer)
+            Me.ValidarFeriadosAsync(fecha, localidad, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub ValidarFeriadosAsync(ByVal fecha As Date, ByVal localidad As Integer, ByVal userState As Object)
+            If (Me.ValidarFeriadosOperationCompleted Is Nothing) Then
+                Me.ValidarFeriadosOperationCompleted = AddressOf Me.OnValidarFeriadosOperationCompleted
+            End If
+            Me.InvokeAsync("ValidarFeriados", New Object() {fecha, localidad}, Me.ValidarFeriadosOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnValidarFeriadosOperationCompleted(ByVal arg As Object)
+            If (Not (Me.ValidarFeriadosCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent ValidarFeriadosCompleted(Me, New ValidarFeriadosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/RecuperarAprobaciones", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function RecuperarAprobaciones(ByVal user As String) As System.Data.DataSet
+            Dim results() As Object = Me.Invoke("RecuperarAprobaciones", New Object() {user})
+            Return CType(results(0),System.Data.DataSet)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub RecuperarAprobacionesAsync(ByVal user As String)
+            Me.RecuperarAprobacionesAsync(user, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub RecuperarAprobacionesAsync(ByVal user As String, ByVal userState As Object)
+            If (Me.RecuperarAprobacionesOperationCompleted Is Nothing) Then
+                Me.RecuperarAprobacionesOperationCompleted = AddressOf Me.OnRecuperarAprobacionesOperationCompleted
+            End If
+            Me.InvokeAsync("RecuperarAprobaciones", New Object() {user}, Me.RecuperarAprobacionesOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnRecuperarAprobacionesOperationCompleted(ByVal arg As Object)
+            If (Not (Me.RecuperarAprobacionesCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent RecuperarAprobacionesCompleted(Me, New RecuperarAprobacionesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/ValidarJustificacion", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function ValidarJustificacion(ByVal user As String) As Boolean
+            Dim results() As Object = Me.Invoke("ValidarJustificacion", New Object() {user})
+            Return CType(results(0),Boolean)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub ValidarJustificacionAsync(ByVal user As String)
+            Me.ValidarJustificacionAsync(user, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub ValidarJustificacionAsync(ByVal user As String, ByVal userState As Object)
+            If (Me.ValidarJustificacionOperationCompleted Is Nothing) Then
+                Me.ValidarJustificacionOperationCompleted = AddressOf Me.OnValidarJustificacionOperationCompleted
+            End If
+            Me.InvokeAsync("ValidarJustificacion", New Object() {user}, Me.ValidarJustificacionOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnValidarJustificacionOperationCompleted(ByVal arg As Object)
+            If (Not (Me.ValidarJustificacionCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent ValidarJustificacionCompleted(Me, New ValidarJustificacionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/GrabarAprobacion", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function GrabarAprobacion(ByVal infoXml As String) As Integer
+            Dim results() As Object = Me.Invoke("GrabarAprobacion", New Object() {infoXml})
+            Return CType(results(0),Integer)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub GrabarAprobacionAsync(ByVal infoXml As String)
+            Me.GrabarAprobacionAsync(infoXml, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub GrabarAprobacionAsync(ByVal infoXml As String, ByVal userState As Object)
+            If (Me.GrabarAprobacionOperationCompleted Is Nothing) Then
+                Me.GrabarAprobacionOperationCompleted = AddressOf Me.OnGrabarAprobacionOperationCompleted
+            End If
+            Me.InvokeAsync("GrabarAprobacion", New Object() {infoXml}, Me.GrabarAprobacionOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnGrabarAprobacionOperationCompleted(ByVal arg As Object)
+            If (Not (Me.GrabarAprobacionCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent GrabarAprobacionCompleted(Me, New GrabarAprobacionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/RecuperarImprimir", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function RecuperarImprimir(ByVal user As String) As System.Data.DataSet
+            Dim results() As Object = Me.Invoke("RecuperarImprimir", New Object() {user})
+            Return CType(results(0),System.Data.DataSet)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub RecuperarImprimirAsync(ByVal user As String)
+            Me.RecuperarImprimirAsync(user, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub RecuperarImprimirAsync(ByVal user As String, ByVal userState As Object)
+            If (Me.RecuperarImprimirOperationCompleted Is Nothing) Then
+                Me.RecuperarImprimirOperationCompleted = AddressOf Me.OnRecuperarImprimirOperationCompleted
+            End If
+            Me.InvokeAsync("RecuperarImprimir", New Object() {user}, Me.RecuperarImprimirOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnRecuperarImprimirOperationCompleted(ByVal arg As Object)
+            If (Not (Me.RecuperarImprimirCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent RecuperarImprimirCompleted(Me, New RecuperarImprimirCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/RecuperarProcesar", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function RecuperarProcesar() As System.Data.DataSet
+            Dim results() As Object = Me.Invoke("RecuperarProcesar", New Object(-1) {})
+            Return CType(results(0),System.Data.DataSet)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub RecuperarProcesarAsync()
+            Me.RecuperarProcesarAsync(Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub RecuperarProcesarAsync(ByVal userState As Object)
+            If (Me.RecuperarProcesarOperationCompleted Is Nothing) Then
+                Me.RecuperarProcesarOperationCompleted = AddressOf Me.OnRecuperarProcesarOperationCompleted
+            End If
+            Me.InvokeAsync("RecuperarProcesar", New Object(-1) {}, Me.RecuperarProcesarOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnRecuperarProcesarOperationCompleted(ByVal arg As Object)
+            If (Not (Me.RecuperarProcesarCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent RecuperarProcesarCompleted(Me, New RecuperarProcesarCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/TotalesProcesar", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function TotalesProcesar() As System.Data.DataSet
+            Dim results() As Object = Me.Invoke("TotalesProcesar", New Object(-1) {})
+            Return CType(results(0),System.Data.DataSet)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub TotalesProcesarAsync()
+            Me.TotalesProcesarAsync(Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub TotalesProcesarAsync(ByVal userState As Object)
+            If (Me.TotalesProcesarOperationCompleted Is Nothing) Then
+                Me.TotalesProcesarOperationCompleted = AddressOf Me.OnTotalesProcesarOperationCompleted
+            End If
+            Me.InvokeAsync("TotalesProcesar", New Object(-1) {}, Me.TotalesProcesarOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnTotalesProcesarOperationCompleted(ByVal arg As Object)
+            If (Not (Me.TotalesProcesarCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent TotalesProcesarCompleted(Me, New TotalesProcesarCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
         
@@ -229,6 +614,330 @@ Namespace HorasExtras.Wsl
             Get
                 Me.RaiseExceptionIfNecessary
                 Return CType(Me.results(0),Boolean)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub RecuperarDatosBiometricoPorUsuarioCompletedEventHandler(ByVal sender As Object, ByVal e As RecuperarDatosBiometricoPorUsuarioCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class RecuperarDatosBiometricoPorUsuarioCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As System.Data.DataSet
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),System.Data.DataSet)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub RecuperarDatosEmpleadoCompletedEventHandler(ByVal sender As Object, ByVal e As RecuperarDatosEmpleadoCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class RecuperarDatosEmpleadoCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As System.Data.DataSet
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),System.Data.DataSet)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub GrabarRegistoCompletedEventHandler(ByVal sender As Object, ByVal e As GrabarRegistoCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class GrabarRegistoCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As Integer
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),Integer)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub EliminarRegistroCompletedEventHandler(ByVal sender As Object, ByVal e As EliminarRegistroCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class EliminarRegistroCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As Integer
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),Integer)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub ActualizarTotalesCompletedEventHandler(ByVal sender As Object, ByVal e As ActualizarTotalesCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class ActualizarTotalesCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As Integer
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),Integer)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub ValidarFeriadosCompletedEventHandler(ByVal sender As Object, ByVal e As ValidarFeriadosCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class ValidarFeriadosCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As Boolean
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),Boolean)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub RecuperarAprobacionesCompletedEventHandler(ByVal sender As Object, ByVal e As RecuperarAprobacionesCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class RecuperarAprobacionesCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As System.Data.DataSet
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),System.Data.DataSet)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub ValidarJustificacionCompletedEventHandler(ByVal sender As Object, ByVal e As ValidarJustificacionCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class ValidarJustificacionCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As Boolean
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),Boolean)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub GrabarAprobacionCompletedEventHandler(ByVal sender As Object, ByVal e As GrabarAprobacionCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class GrabarAprobacionCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As Integer
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),Integer)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub RecuperarImprimirCompletedEventHandler(ByVal sender As Object, ByVal e As RecuperarImprimirCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class RecuperarImprimirCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As System.Data.DataSet
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),System.Data.DataSet)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub RecuperarProcesarCompletedEventHandler(ByVal sender As Object, ByVal e As RecuperarProcesarCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class RecuperarProcesarCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As System.Data.DataSet
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),System.Data.DataSet)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub TotalesProcesarCompletedEventHandler(ByVal sender As Object, ByVal e As TotalesProcesarCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class TotalesProcesarCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As System.Data.DataSet
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),System.Data.DataSet)
             End Get
         End Property
     End Class

@@ -15,7 +15,8 @@ Public Class Registro
 #Region "Manejo de Datos"
 
     Private Sub Llenar_Grid()
-        Dim SQLConexionBD As New SQLConexionBD()
+        'Dim SQLConexionBD As New SQLConexionBD()
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dtBiometrico As New DataTable
         Dim dtEmpleado As New DataTable
         Dim dsTablas As New DataSet
@@ -81,7 +82,8 @@ Public Class Registro
     End Sub
 
     Private Function GrabarRegistros(ByVal rows As DataRow) As Integer
-        Dim SQLConexionBD As New SQLConexionBD()
+        'Dim SQLConexionBD As New SQLConexionBD()
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim HorasExtrasId As Integer
         Dim infoXlm As String = infoXML(rows)
         HorasExtrasId = SQLConexionBD.GrabarRegisto(Context.User.Identity.Name, infoXlm)
@@ -89,7 +91,8 @@ Public Class Registro
     End Function
 
     Private Function EliminarRegistros(ByVal rows As DataRow) As Integer
-        Dim SQLConexionBD As New SQLConexionBD()
+        'Dim SQLConexionBD As New SQLConexionBD()
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim Resultados As Integer
         Dim infoXlm As String = infoXML(rows)
         Resultados = SQLConexionBD.EliminarRegistro(Context.User.Identity.Name, infoXlm)
@@ -155,7 +158,8 @@ Public Class Registro
 
     Private Function ActualizarTotales() As Integer
         Totales()
-        Dim SQLConexionBD As New SQLConexionBD()
+        'Dim SQLConexionBD As New SQLConexionBD()
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim Resultados As Integer
         Dim infoXlm As String = infoXMLTotal()
         Resultados = SQLConexionBD.ActualizarTotales(Context.User.Identity.Name, infoXlm)
@@ -543,7 +547,8 @@ Public Class Registro
             row("Horas100") = TotalDiferencia
             resultado = True
         Else 'Lunes a Viernes
-            Dim SQLConexionBD As New SQLConexionBD()
+            'Dim SQLConexionBD As New SQLConexionBD()
+            Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
             Dim feriado As Boolean = SQLConexionBD.ValidarFeriados(fecha, Master.areaId)
             If feriado = True Then 'SI es feriado --> 100%
                 row("Horas100") = TotalDiferencia

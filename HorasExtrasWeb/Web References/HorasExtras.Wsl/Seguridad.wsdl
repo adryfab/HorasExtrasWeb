@@ -39,6 +39,212 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="RecuperarDatosBiometricoPorUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperarDatosBiometricoPorUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RecuperarDatosBiometricoPorUsuarioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperarDatosEmpleado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperarDatosEmpleadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RecuperarDatosEmpleadoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GrabarRegisto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="infoXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GrabarRegistoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GrabarRegistoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarRegistro">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="infoXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarRegistroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EliminarRegistroResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarTotales">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="infoXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarTotalesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActualizarTotalesResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarFeriados">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fecha" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="localidad" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarFeriadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidarFeriadosResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperarAprobaciones">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperarAprobacionesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RecuperarAprobacionesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarJustificacion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarJustificacionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidarJustificacionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GrabarAprobacion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="infoXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GrabarAprobacionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GrabarAprobacionResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperarImprimir">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperarImprimirResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RecuperarImprimirResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperarProcesar">
+        <s:complexType />
+      </s:element>
+      <s:element name="RecuperarProcesarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RecuperarProcesarResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TotalesProcesar">
+        <s:complexType />
+      </s:element>
+      <s:element name="TotalesProcesarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TotalesProcesarResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="ValidarCredencialesSoapIn">
@@ -53,6 +259,78 @@
   <wsdl:message name="MenuProcesarSoapOut">
     <wsdl:part name="parameters" element="tns:MenuProcesarResponse" />
   </wsdl:message>
+  <wsdl:message name="RecuperarDatosBiometricoPorUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:RecuperarDatosBiometricoPorUsuario" />
+  </wsdl:message>
+  <wsdl:message name="RecuperarDatosBiometricoPorUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:RecuperarDatosBiometricoPorUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecuperarDatosEmpleadoSoapIn">
+    <wsdl:part name="parameters" element="tns:RecuperarDatosEmpleado" />
+  </wsdl:message>
+  <wsdl:message name="RecuperarDatosEmpleadoSoapOut">
+    <wsdl:part name="parameters" element="tns:RecuperarDatosEmpleadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GrabarRegistoSoapIn">
+    <wsdl:part name="parameters" element="tns:GrabarRegisto" />
+  </wsdl:message>
+  <wsdl:message name="GrabarRegistoSoapOut">
+    <wsdl:part name="parameters" element="tns:GrabarRegistoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarRegistroSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarRegistro" />
+  </wsdl:message>
+  <wsdl:message name="EliminarRegistroSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarRegistroResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarTotalesSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarTotales" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarTotalesSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarTotalesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidarFeriadosSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarFeriados" />
+  </wsdl:message>
+  <wsdl:message name="ValidarFeriadosSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarFeriadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecuperarAprobacionesSoapIn">
+    <wsdl:part name="parameters" element="tns:RecuperarAprobaciones" />
+  </wsdl:message>
+  <wsdl:message name="RecuperarAprobacionesSoapOut">
+    <wsdl:part name="parameters" element="tns:RecuperarAprobacionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidarJustificacionSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarJustificacion" />
+  </wsdl:message>
+  <wsdl:message name="ValidarJustificacionSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarJustificacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GrabarAprobacionSoapIn">
+    <wsdl:part name="parameters" element="tns:GrabarAprobacion" />
+  </wsdl:message>
+  <wsdl:message name="GrabarAprobacionSoapOut">
+    <wsdl:part name="parameters" element="tns:GrabarAprobacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecuperarImprimirSoapIn">
+    <wsdl:part name="parameters" element="tns:RecuperarImprimir" />
+  </wsdl:message>
+  <wsdl:message name="RecuperarImprimirSoapOut">
+    <wsdl:part name="parameters" element="tns:RecuperarImprimirResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecuperarProcesarSoapIn">
+    <wsdl:part name="parameters" element="tns:RecuperarProcesar" />
+  </wsdl:message>
+  <wsdl:message name="RecuperarProcesarSoapOut">
+    <wsdl:part name="parameters" element="tns:RecuperarProcesarResponse" />
+  </wsdl:message>
+  <wsdl:message name="TotalesProcesarSoapIn">
+    <wsdl:part name="parameters" element="tns:TotalesProcesar" />
+  </wsdl:message>
+  <wsdl:message name="TotalesProcesarSoapOut">
+    <wsdl:part name="parameters" element="tns:TotalesProcesarResponse" />
+  </wsdl:message>
   <wsdl:portType name="SeguridadSoap">
     <wsdl:operation name="ValidarCredenciales">
       <wsdl:input message="tns:ValidarCredencialesSoapIn" />
@@ -61,6 +339,54 @@
     <wsdl:operation name="MenuProcesar">
       <wsdl:input message="tns:MenuProcesarSoapIn" />
       <wsdl:output message="tns:MenuProcesarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarDatosBiometricoPorUsuario">
+      <wsdl:input message="tns:RecuperarDatosBiometricoPorUsuarioSoapIn" />
+      <wsdl:output message="tns:RecuperarDatosBiometricoPorUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarDatosEmpleado">
+      <wsdl:input message="tns:RecuperarDatosEmpleadoSoapIn" />
+      <wsdl:output message="tns:RecuperarDatosEmpleadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GrabarRegisto">
+      <wsdl:input message="tns:GrabarRegistoSoapIn" />
+      <wsdl:output message="tns:GrabarRegistoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarRegistro">
+      <wsdl:input message="tns:EliminarRegistroSoapIn" />
+      <wsdl:output message="tns:EliminarRegistroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarTotales">
+      <wsdl:input message="tns:ActualizarTotalesSoapIn" />
+      <wsdl:output message="tns:ActualizarTotalesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarFeriados">
+      <wsdl:input message="tns:ValidarFeriadosSoapIn" />
+      <wsdl:output message="tns:ValidarFeriadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarAprobaciones">
+      <wsdl:input message="tns:RecuperarAprobacionesSoapIn" />
+      <wsdl:output message="tns:RecuperarAprobacionesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarJustificacion">
+      <wsdl:input message="tns:ValidarJustificacionSoapIn" />
+      <wsdl:output message="tns:ValidarJustificacionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GrabarAprobacion">
+      <wsdl:input message="tns:GrabarAprobacionSoapIn" />
+      <wsdl:output message="tns:GrabarAprobacionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarImprimir">
+      <wsdl:input message="tns:RecuperarImprimirSoapIn" />
+      <wsdl:output message="tns:RecuperarImprimirSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarProcesar">
+      <wsdl:input message="tns:RecuperarProcesarSoapIn" />
+      <wsdl:output message="tns:RecuperarProcesarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TotalesProcesar">
+      <wsdl:input message="tns:TotalesProcesarSoapIn" />
+      <wsdl:output message="tns:TotalesProcesarSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="SeguridadSoap" type="tns:SeguridadSoap">
@@ -83,6 +409,114 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RecuperarDatosBiometricoPorUsuario">
+      <soap:operation soapAction="http://www.loteria.com.ec/RecuperarDatosBiometricoPorUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarDatosEmpleado">
+      <soap:operation soapAction="http://www.loteria.com.ec/RecuperarDatosEmpleado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GrabarRegisto">
+      <soap:operation soapAction="http://www.loteria.com.ec/GrabarRegisto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarRegistro">
+      <soap:operation soapAction="http://www.loteria.com.ec/EliminarRegistro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarTotales">
+      <soap:operation soapAction="http://www.loteria.com.ec/ActualizarTotales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarFeriados">
+      <soap:operation soapAction="http://www.loteria.com.ec/ValidarFeriados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarAprobaciones">
+      <soap:operation soapAction="http://www.loteria.com.ec/RecuperarAprobaciones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarJustificacion">
+      <soap:operation soapAction="http://www.loteria.com.ec/ValidarJustificacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GrabarAprobacion">
+      <soap:operation soapAction="http://www.loteria.com.ec/GrabarAprobacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarImprimir">
+      <soap:operation soapAction="http://www.loteria.com.ec/RecuperarImprimir" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarProcesar">
+      <soap:operation soapAction="http://www.loteria.com.ec/RecuperarProcesar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TotalesProcesar">
+      <soap:operation soapAction="http://www.loteria.com.ec/TotalesProcesar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="SeguridadSoap12" type="tns:SeguridadSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -97,6 +531,114 @@
     </wsdl:operation>
     <wsdl:operation name="MenuProcesar">
       <soap12:operation soapAction="http://www.loteria.com.ec/MenuProcesar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarDatosBiometricoPorUsuario">
+      <soap12:operation soapAction="http://www.loteria.com.ec/RecuperarDatosBiometricoPorUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarDatosEmpleado">
+      <soap12:operation soapAction="http://www.loteria.com.ec/RecuperarDatosEmpleado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GrabarRegisto">
+      <soap12:operation soapAction="http://www.loteria.com.ec/GrabarRegisto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarRegistro">
+      <soap12:operation soapAction="http://www.loteria.com.ec/EliminarRegistro" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarTotales">
+      <soap12:operation soapAction="http://www.loteria.com.ec/ActualizarTotales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarFeriados">
+      <soap12:operation soapAction="http://www.loteria.com.ec/ValidarFeriados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarAprobaciones">
+      <soap12:operation soapAction="http://www.loteria.com.ec/RecuperarAprobaciones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarJustificacion">
+      <soap12:operation soapAction="http://www.loteria.com.ec/ValidarJustificacion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GrabarAprobacion">
+      <soap12:operation soapAction="http://www.loteria.com.ec/GrabarAprobacion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarImprimir">
+      <soap12:operation soapAction="http://www.loteria.com.ec/RecuperarImprimir" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarProcesar">
+      <soap12:operation soapAction="http://www.loteria.com.ec/RecuperarProcesar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TotalesProcesar">
+      <soap12:operation soapAction="http://www.loteria.com.ec/TotalesProcesar" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

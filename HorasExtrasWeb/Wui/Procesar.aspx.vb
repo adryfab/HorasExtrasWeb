@@ -14,7 +14,8 @@ Public Class Procesar
 #Region "Manejo de Datos"
 
     Private Sub Llenar_Grid()
-        Dim SQLConexionBD As New SQLConexionBD()
+        'Dim SQLConexionBD As New SQLConexionBD()
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dsTablas As New DataSet
         Dim dtProcesar As New DataTable
         Dim dsEmpleados As New DataSet
@@ -81,7 +82,8 @@ Public Class Procesar
     End Sub
 
     Private Sub GenerarTotales()
-        Dim SQLConexionBD As New SQLConexionBD()
+        'Dim SQLConexionBD As New SQLConexionBD()
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dsTotales As New DataSet
         Dim dtTotal050 As New DataTable
         Dim dtTotal100 As New DataTable
@@ -95,7 +97,6 @@ Public Class Procesar
         dtTotal100 = dsTotales.Tables(1)
         Session("dtTotal100") = dtTotal100
 
-        'GenerarArchivo(dtTotal050, dtTotal100)
     End Sub
 
     Private Sub GenerarArchivo050(ByVal dt050 As DataTable)
@@ -144,7 +145,7 @@ Public Class Procesar
 
     Private Function RutaArchivo() As String
         Dim rootWebConfig1 As System.Configuration.Configuration
-        Dim Ruta As System.Configuration.KeyValueConfigurationElement
+        Dim Ruta As System.Configuration.KeyValueConfigurationElement = Nothing
         rootWebConfig1 = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~/")
         If (0 < rootWebConfig1.AppSettings.Settings.Count) Then
             Ruta = rootWebConfig1.AppSettings.Settings("Ruta")
