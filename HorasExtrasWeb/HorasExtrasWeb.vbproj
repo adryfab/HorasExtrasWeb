@@ -88,11 +88,18 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\w3.css" />
+    <Content Include="icons\account_box1.png" />
+    <Content Include="icons\account_circle1.png" />
     <Content Include="icons\aceptar.ico" />
     <Content Include="icons\buscar.ico" />
+    <Content Include="icons\Button-Download1.png" />
+    <Content Include="icons\create1.png" />
     <Content Include="icons\editar.ico" />
     <Content Include="icons\eliminar.ico" />
     <Content Include="icons\guardar.ico" />
+    <Content Include="icons\home1.png" />
     <Content Include="icons\impresora.ico" />
     <Content Include="icons\minus.gif" />
     <Content Include="icons\nuevo.ico" />
@@ -258,7 +265,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>30386</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8090/HorasExtras</IISUrl>
+          <IISUrl>http://localhost:8090/HorasExtrasWeb</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

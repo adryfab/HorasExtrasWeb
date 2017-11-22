@@ -3,7 +3,7 @@
 <%@ MasterType virtualpath="Maestro.Master" %>
 <%@ OutputCache Location="None" NoStore="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <div class="w3-container w3-center w3-panel w3-blue">
@@ -12,16 +12,21 @@
     <br />        
         <div class="w3-row w3-section">
             <div class="w3-rest">
-                <label>Dominio</label>
-                <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-home"></i></div>
-                <asp:TextBox ID="txtDomain" Runat="server" Text="CENTRAL" class="w3-input w3-border" style="width:20%" />
+                <div class="w3-col" style="width:30px">
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/icons/home1.png" />
+                </div>
+                <asp:TextBox ID="txtDomain" Runat="server" Text="CENTRAL" class="w3-input w3-border" style="width:20%" placeholder="Dominio" />
             </div>
-            <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
             <div class="w3-rest">
+                <div class="w3-col" style="width:30px">
+                    <asp:Image ID="Image2" runat="server" ImageUrl="~/icons/account_circle1.png" />
+                </div>
                 <asp:TextBox ID="txtUsername" Runat="server" class="w3-input w3-border" style="width:20%" placeholder="Nombre de Usuario" />
             </div>
-            <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-pencil"></i></div>
             <div class="w3-rest">
+                <div class="w3-col" style="width:30px">
+                    <asp:Image ID="Image3" runat="server" ImageUrl="~/icons/create1.png" />
+                </div>
                 <asp:TextBox ID="txtPassword" Runat="server" TextMode="Password" class="w3-input w3-border" style="width:20%" 
                     placeholder="Contraseña"/>
             </div>

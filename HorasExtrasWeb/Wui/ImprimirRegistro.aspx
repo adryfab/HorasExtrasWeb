@@ -1,9 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ImprimirRegistro.aspx.vb" Inherits="HorasExtrasWeb.ImprimirRegistro" %>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link href="../css/w3.css" rel="stylesheet" type="text/css" />
     <title></title>
 </head>
 <body>

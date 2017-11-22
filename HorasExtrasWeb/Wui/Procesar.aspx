@@ -8,8 +8,10 @@
         <h2 class="w3-opacity" style="text-shadow:2px 2px 0 #444">Procesar</h2>
     </div>
     <div>        
-        <asp:Button ID="btn050" runat="server" Text="Generar Archivo 50%" />
-        <asp:Button ID="btn100" runat="server" Text="Generar Archivo 100%" />
+        <asp:Button ID="btn050" runat="server" Text="Generar Archivo 50%" 
+            CssClass="w3-button w3-blue-grey w3-round-xlarge w3-hover-red w3-border w3-border-blue" />
+        <asp:Button ID="btn100" runat="server" Text="Generar Archivo 100%" 
+            CssClass="w3-button w3-blue-grey w3-round-xlarge w3-hover-red w3-border w3-border-blue" />
         <asp:Label ID="lblOk" runat="server" Text="" Visible="false" CssClass="w3-panel w3-blue"/>
         <asp:Label ID="lblError" runat="server" Text="" Visible="false" CssClass="w3-panel w3-red"/>
     </div>
@@ -67,7 +69,6 @@
                 </asp:TemplateField>                
             </Columns>
         </asp:GridView>
-    </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

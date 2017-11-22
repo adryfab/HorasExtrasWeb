@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Login
     
     '''<summary>
+    '''Control Image1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image1 As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
     '''Control txtDomain.
     '''</summary>
     '''<remarks>
@@ -23,6 +32,15 @@ Partial Public Class Login
     Protected WithEvents txtDomain As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''Control Image2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image2 As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
     '''Control txtUsername.
     '''</summary>
     '''<remarks>
@@ -30,6 +48,15 @@ Partial Public Class Login
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtUsername As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Control Image3.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image3 As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
     '''Control txtPassword.
