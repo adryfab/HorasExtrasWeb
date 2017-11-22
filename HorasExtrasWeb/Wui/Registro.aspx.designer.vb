@@ -32,13 +32,22 @@ Partial Public Class Registro
     Protected WithEvents btnPrint As Global.System.Web.UI.WebControls.ImageButton
     
     '''<summary>
-    '''Control Button1.
+    '''Control btnPrint1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Button1 As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnPrint1 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Control Label9.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Label9 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Control lblAprobado.

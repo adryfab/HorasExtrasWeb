@@ -162,7 +162,7 @@ Public Class Registro
     End Function
 
     Private Function ActualizarTotales() As Integer
-        Totales()
+        'Totales()
         'Dim SQLConexionBD As New SQLConexionBD()
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim Resultados As Integer
@@ -264,7 +264,8 @@ Public Class Registro
             minTot100 = (minRec - (min100 + 60)) * (-1)
         End If
 
-        Dim row As New GridViewRow(0, 0, DataControlRowType.Footer, DataControlRowState.Normal)
+        Dim footer As GridViewRow = gvBiometrico.FooterRow
+        Dim row As New GridViewRow(footer.RowIndex + 1, -1, footer.RowType, footer.RowState)
         Dim cel0, cel050, cel100 As New TableCell()
         cel0.Text = "Total de Horas a pagar"
         cel0.ColumnSpan = 8
@@ -614,6 +615,10 @@ Public Class Registro
     End Sub
 
     Protected Sub btnPrint_Click(sender As Object, e As ImageClickEventArgs) Handles btnPrint.Click
+        Response.Redirect("~/Wui/ImprimirRegistro.aspx")
+    End Sub
+
+    Protected Sub btnPrint1_Click(sender As Object, e As EventArgs) Handles btnPrint1.Click
         Response.Redirect("~/Wui/ImprimirRegistro.aspx")
     End Sub
 

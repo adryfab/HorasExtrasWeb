@@ -55,6 +55,8 @@
     .submit {
         text-align:right;
         background:url(../icons/impresora.ico) no-repeat left;
+        background-color:Turquoise;
+        font-size:75%;
     }
 </style>
 </asp:Content>
@@ -72,8 +74,11 @@
                 </td>
                 <td>
                     <asp:ImageButton ID="btnPrint" runat="server" CommandName="Imprimir" ImageUrl="../icons/impresora.ico" ToolTipText="Imprimir" 
-                        CausesValidation="False" />
-                    <asp:Button ID="Button1" runat="server" Text="Imprimir" CssClass="submit" Width="100px" />
+                        CausesValidation="False" Visible="false"/>
+                    <asp:Button ID="btnPrint1" runat="server" Text="Imprimir" CssClass="submit" Width="100px" />
+                </td>
+                <td>
+                    <asp:Label ID="Label9" runat="server" Text="Es OBLIGATORIO imprimir y firmar las Horas Extras" CssClass="w3-tiny"/>
                 </td>
                 <td>
                     <asp:Label ID="lblAprobado" runat="server" Text="Aprobado" Visible="false" class="w3-red"/>
@@ -304,8 +309,6 @@
                     <EditItemTemplate>
                         <asp:TextBox ID="Justificativo" runat="server" Text='<%#Bind("Justificativo") %>' />
                         <br>
-                        <%--<asp:RequiredFieldValidator id="JustValidator" ControlToValidate="Justificativo"
-                            display="Dynamic" text="FALTA!" runat="server" />--%>
                             <asp:Label ID="lblJustVal" runat="server" Text="" Visible="false"/>
                         </br>
                     </EditItemTemplate>
