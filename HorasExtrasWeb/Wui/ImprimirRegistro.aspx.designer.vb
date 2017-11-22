@@ -176,24 +176,6 @@ Partial Public Class ImprimirRegistro
     Protected WithEvents lblSolicitante As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Control lblSupervisor.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblSupervisor As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Control lblJefe.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblJefe As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''Control Label12.
     '''</summary>
     '''<remarks>
@@ -203,6 +185,15 @@ Partial Public Class ImprimirRegistro
     Protected WithEvents Label12 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''Control lblSupervisor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblSupervisor As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Control Label13.
     '''</summary>
     '''<remarks>
@@ -210,6 +201,15 @@ Partial Public Class ImprimirRegistro
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents Label13 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Control lblJefe.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblJefe As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Control Label14.

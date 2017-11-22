@@ -94,6 +94,7 @@
                 min050 = min050 + Convert.ToDateTime(row("Horas50")).Minute
             Next
 
+            gvBiometrico50.FooterRow.Cells(4).Text = "Total Permiso"
             gvBiometrico50.FooterRow.Cells(5).Text = String.Format("{0}:{1}", horPer + Fix(minPer / 60), minPer Mod 60)
             gvBiometrico50.FooterRow.Cells(6).Text = String.Format("{0}:{1}", hor050 + Fix(min050 / 60), min050 Mod 60)
 
@@ -119,6 +120,7 @@
                 min100 = min100 + Convert.ToDateTime(row("Horas100")).Minute
             Next
 
+            gvBiometrico100.FooterRow.Cells(4).Text = "Total Recuperar"
             gvBiometrico100.FooterRow.Cells(5).Text = String.Format("{0}:{1}", horRec + Fix(minRec / 60), minRec Mod 60)
             gvBiometrico100.FooterRow.Cells(6).Text = String.Format("{0}:{1}", hor100 + Fix(min100 / 60), min100 Mod 60)
 

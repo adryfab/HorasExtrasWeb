@@ -51,12 +51,35 @@
         } 
     } 
     </script> 
+    <style type="text/css">
+    .submit {
+        text-align:right;
+        background:url(../icons/impresora.ico) no-repeat left;
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="w3-container w3-center w3-panel w3-blue">
         <h2 class="w3-opacity" style="text-shadow:2px 2px 0 #444">Registro de Horas Extras</h2>
     </div>
     <div>
+    </div>
+        <div>
+        <table>
+            <tr>
+                <td>
+                    <asp:Button ID="BtnAdd" runat="server" Text="Agregar Registro" />
+                </td>
+                <td>
+                    <asp:ImageButton ID="btnPrint" runat="server" CommandName="Imprimir" ImageUrl="../icons/impresora.ico" ToolTipText="Imprimir" 
+                        CausesValidation="False" />
+                    <asp:Button ID="Button1" runat="server" Text="Imprimir" CssClass="submit" Width="100px" />
+                </td>
+                <td>
+                    <asp:Label ID="lblAprobado" runat="server" Text="Aprobado" Visible="false" class="w3-red"/>
+                </td>
+            </tr>
+        </table>
     </div>
     <div id="NewReg2" runat="server" visible="false">
         <table>
@@ -87,7 +110,7 @@
                     <asp:Label ID="Label1" runat="server" Text="Fecha:"/>
                 </td>
                 <td>
-                    <asp:TextBox ID="FechaTxt" runat="server" Width="100px"/>
+                    <asp:TextBox ID="FechaTxt" runat="server" Width="120px"/>
                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                     <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" Mask="99/99/9999" MaskType="Date" TargetControlID="FechaTxt" />
                     <ajaxToolkit:CalendarExtender ID="customCalendarExtender" runat="server" TargetControlID="FechaTxt"
@@ -121,7 +144,7 @@
                     <asp:Label ID="Label4" runat="server" Text="Justificativo:"/>
                 </td>
                 <td>
-                    <asp:TextBox ID="DetalleTxt" runat="server" Width="150px"/>
+                    <asp:TextBox ID="DetalleTxt" runat="server" Width="200px"/>
                 </td>
                 <td>
                     <asp:ImageButton ID="btnAgregar" runat="server" CommandName="Agregar" ImageUrl="../icons/guardar.ico" ToolTipText="Agregar" />
@@ -317,24 +340,6 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
-    </div>
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <asp:Button ID="BtnAdd" runat="server" Text="Agregar Registro" />
-                </td>
-                <td>
-                    <asp:Label ID="lblAprobado" runat="server" Text="Aprobado" Visible="false" class="w3-red"/>
-                </td>
-                <td>
-                    <asp:ImageButton ID="btnPrint" runat="server" CommandName="Imprimir" ImageUrl="../icons/impresora.ico" ToolTipText="Imprimir" 
-                        CausesValidation="False" />
-                </td>
-                <td>
-                    &nbsp;</td>
-            </tr>
-        </table>
     </div>
     <br />    
 </asp:Content>

@@ -81,7 +81,7 @@
         <div>
             <asp:GridView ID="gvBiometrico50" runat="server" AutoGenerateColumns="False" ShowFooter="True">
                 <HeaderStyle CssClass="w3-gray w3-tiny"/>
-                <FooterStyle CssClass="w3-gray w3-center w3-tiny" />
+                <FooterStyle CssClass="w3-center w3-tiny" Font-Bold="true" />
                 <Columns>
                     <asp:TemplateField HeaderText="N°">
                         <ItemTemplate>
@@ -143,7 +143,7 @@
         <div>
             <asp:GridView ID="gvBiometrico100" runat="server" AutoGenerateColumns="False" ShowFooter="True">
                 <HeaderStyle CssClass="w3-gray w3-tiny" />
-                <FooterStyle CssClass="w3-gray w3-center w3-tiny" />
+                <FooterStyle CssClass="w3-center w3-tiny" Font-Bold="true" />
                 <Columns>
                     <asp:TemplateField HeaderText="N°">
                         <ItemTemplate>
@@ -185,7 +185,7 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Justificativo de extensión de jornada">
+                    <asp:TemplateField HeaderText="Justificativo extensión de jornada">
                         <ItemTemplate>
                             <asp:Label ID="Justificativo" runat="server" Text='<%# Bind("Justificativo") %>' />
                         </ItemTemplate>
@@ -196,27 +196,31 @@
         </div>
         <br />
         <br />
+        <br />
         <div>
             <table style="width: 100%;" class="w3-center w3-tiny">
                 <tr>
-                    <td class="w3-border-bottom">
-                        <asp:Label ID="lblSolicitante" runat="server" Text="lblSolicitante" />
+                    <td class="w3-border-bottom">                        
                     </td>
-                    <td class="w3-border-bottom">
-                        <asp:Label ID="lblSupervisor" runat="server" Text="lblSupervisor" />
+                    <td class="w3-border-bottom">                        
                     </td>
-                    <td class="w3-border-bottom">
-                        <asp:Label ID="lblJefe" runat="server" Text="lblJefe" />
+                    <td class="w3-border-bottom">                        
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <asp:Label ID="lblSolicitante" runat="server" Text="lblSolicitante" />
+                        <br />
                         <asp:Label ID="Label12" runat="server" Text="Solicitante" />
                     </td>
                     <td>
+                        <asp:Label ID="lblSupervisor" runat="server" Text="lblSupervisor" />
+                        <br />
                         <asp:Label ID="Label13" runat="server" Text="Supervisor inmediato" />
                     </td>
                     <td>
+                        <asp:Label ID="lblJefe" runat="server" Text="lblJefe" />
+                        <br />
                         <asp:Label ID="Label14" runat="server" Text="Gerente/Jefe Dpto." />
                     </td>
                 </tr>

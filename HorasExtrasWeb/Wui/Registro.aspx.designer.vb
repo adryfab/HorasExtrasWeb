@@ -14,6 +14,42 @@ Option Explicit On
 Partial Public Class Registro
     
     '''<summary>
+    '''Control BtnAdd.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents BtnAdd As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Control btnPrint.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnPrint As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''Control Button1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Button1 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Control lblAprobado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblAprobado As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Control NewReg2.
     '''</summary>
     '''<remarks>
@@ -273,33 +309,6 @@ Partial Public Class Registro
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents gvBiometrico As Global.System.Web.UI.WebControls.GridView
-    
-    '''<summary>
-    '''Control BtnAdd.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents BtnAdd As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''Control lblAprobado.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblAprobado As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Control btnPrint.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnPrint As Global.System.Web.UI.WebControls.ImageButton
     
     '''<summary>
     '''Propiedad Master.
