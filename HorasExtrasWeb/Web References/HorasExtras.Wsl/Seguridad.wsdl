@@ -23,6 +23,22 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ValidarCredencialesNEW">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="clave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dominio" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarCredencialesNEWResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidarCredencialesNEWResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="MenuProcesar">
         <s:complexType>
           <s:sequence>
@@ -245,6 +261,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="MenuAprobar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MenuAprobarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MenuAprobarResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="ValidarCredencialesSoapIn">
@@ -252,6 +282,12 @@
   </wsdl:message>
   <wsdl:message name="ValidarCredencialesSoapOut">
     <wsdl:part name="parameters" element="tns:ValidarCredencialesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidarCredencialesNEWSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarCredencialesNEW" />
+  </wsdl:message>
+  <wsdl:message name="ValidarCredencialesNEWSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarCredencialesNEWResponse" />
   </wsdl:message>
   <wsdl:message name="MenuProcesarSoapIn">
     <wsdl:part name="parameters" element="tns:MenuProcesar" />
@@ -331,10 +367,20 @@
   <wsdl:message name="TotalesProcesarSoapOut">
     <wsdl:part name="parameters" element="tns:TotalesProcesarResponse" />
   </wsdl:message>
+  <wsdl:message name="MenuAprobarSoapIn">
+    <wsdl:part name="parameters" element="tns:MenuAprobar" />
+  </wsdl:message>
+  <wsdl:message name="MenuAprobarSoapOut">
+    <wsdl:part name="parameters" element="tns:MenuAprobarResponse" />
+  </wsdl:message>
   <wsdl:portType name="SeguridadSoap">
     <wsdl:operation name="ValidarCredenciales">
       <wsdl:input message="tns:ValidarCredencialesSoapIn" />
       <wsdl:output message="tns:ValidarCredencialesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarCredencialesNEW">
+      <wsdl:input message="tns:ValidarCredencialesNEWSoapIn" />
+      <wsdl:output message="tns:ValidarCredencialesNEWSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="MenuProcesar">
       <wsdl:input message="tns:MenuProcesarSoapIn" />
@@ -388,11 +434,24 @@
       <wsdl:input message="tns:TotalesProcesarSoapIn" />
       <wsdl:output message="tns:TotalesProcesarSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="MenuAprobar">
+      <wsdl:input message="tns:MenuAprobarSoapIn" />
+      <wsdl:output message="tns:MenuAprobarSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="SeguridadSoap" type="tns:SeguridadSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ValidarCredenciales">
       <soap:operation soapAction="http://www.loteria.com.ec/ValidarCredenciales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarCredencialesNEW">
+      <soap:operation soapAction="http://www.loteria.com.ec/ValidarCredencialesNEW" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -517,11 +576,29 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="MenuAprobar">
+      <soap:operation soapAction="http://www.loteria.com.ec/MenuAprobar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="SeguridadSoap12" type="tns:SeguridadSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ValidarCredenciales">
       <soap12:operation soapAction="http://www.loteria.com.ec/ValidarCredenciales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarCredencialesNEW">
+      <soap12:operation soapAction="http://www.loteria.com.ec/ValidarCredencialesNEW" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -639,6 +716,15 @@
     </wsdl:operation>
     <wsdl:operation name="TotalesProcesar">
       <soap12:operation soapAction="http://www.loteria.com.ec/TotalesProcesar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MenuAprobar">
+      <soap12:operation soapAction="http://www.loteria.com.ec/MenuAprobar" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

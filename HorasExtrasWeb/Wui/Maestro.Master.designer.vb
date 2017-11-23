@@ -32,6 +32,15 @@ Partial Public Class Maestro
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''Control idAprobar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents idAprobar As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
     '''Control idProcesar.
     '''</summary>
     '''<remarks>

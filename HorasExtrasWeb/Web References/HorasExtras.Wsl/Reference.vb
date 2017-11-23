@@ -34,6 +34,8 @@ Namespace HorasExtras.Wsl
         
         Private ValidarCredencialesOperationCompleted As System.Threading.SendOrPostCallback
         
+        Private ValidarCredencialesNEWOperationCompleted As System.Threading.SendOrPostCallback
+        
         Private MenuProcesarOperationCompleted As System.Threading.SendOrPostCallback
         
         Private RecuperarDatosBiometricoPorUsuarioOperationCompleted As System.Threading.SendOrPostCallback
@@ -59,6 +61,8 @@ Namespace HorasExtras.Wsl
         Private RecuperarProcesarOperationCompleted As System.Threading.SendOrPostCallback
         
         Private TotalesProcesarOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private MenuAprobarOperationCompleted As System.Threading.SendOrPostCallback
         
         Private useDefaultCredentialsSetExplicitly As Boolean
         
@@ -102,6 +106,9 @@ Namespace HorasExtras.Wsl
         Public Event ValidarCredencialesCompleted As ValidarCredencialesCompletedEventHandler
         
         '''<remarks/>
+        Public Event ValidarCredencialesNEWCompleted As ValidarCredencialesNEWCompletedEventHandler
+        
+        '''<remarks/>
         Public Event MenuProcesarCompleted As MenuProcesarCompletedEventHandler
         
         '''<remarks/>
@@ -141,6 +148,9 @@ Namespace HorasExtras.Wsl
         Public Event TotalesProcesarCompleted As TotalesProcesarCompletedEventHandler
         
         '''<remarks/>
+        Public Event MenuAprobarCompleted As MenuAprobarCompletedEventHandler
+        
+        '''<remarks/>
         <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/ValidarCredenciales", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
         Public Function ValidarCredenciales(ByRef usuario As String, ByVal clave As String, ByVal dominio As String, ByRef CodEmp As String, ByRef NomEmp As String) As Boolean
             Dim results() As Object = Me.Invoke("ValidarCredenciales", New Object() {usuario, clave, dominio, CodEmp, NomEmp})
@@ -167,6 +177,33 @@ Namespace HorasExtras.Wsl
             If (Not (Me.ValidarCredencialesCompletedEvent) Is Nothing) Then
                 Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
                 RaiseEvent ValidarCredencialesCompleted(Me, New ValidarCredencialesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/ValidarCredencialesNEW", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function ValidarCredencialesNEW(ByVal usuario As String, ByVal clave As String, ByVal dominio As String) As Boolean
+            Dim results() As Object = Me.Invoke("ValidarCredencialesNEW", New Object() {usuario, clave, dominio})
+            Return CType(results(0),Boolean)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub ValidarCredencialesNEWAsync(ByVal usuario As String, ByVal clave As String, ByVal dominio As String)
+            Me.ValidarCredencialesNEWAsync(usuario, clave, dominio, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub ValidarCredencialesNEWAsync(ByVal usuario As String, ByVal clave As String, ByVal dominio As String, ByVal userState As Object)
+            If (Me.ValidarCredencialesNEWOperationCompleted Is Nothing) Then
+                Me.ValidarCredencialesNEWOperationCompleted = AddressOf Me.OnValidarCredencialesNEWOperationCompleted
+            End If
+            Me.InvokeAsync("ValidarCredencialesNEW", New Object() {usuario, clave, dominio}, Me.ValidarCredencialesNEWOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnValidarCredencialesNEWOperationCompleted(ByVal arg As Object)
+            If (Not (Me.ValidarCredencialesNEWCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent ValidarCredencialesNEWCompleted(Me, New ValidarCredencialesNEWCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
         
@@ -522,6 +559,33 @@ Namespace HorasExtras.Wsl
         End Sub
         
         '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/MenuAprobar", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function MenuAprobar(ByVal user As String) As Boolean
+            Dim results() As Object = Me.Invoke("MenuAprobar", New Object() {user})
+            Return CType(results(0),Boolean)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub MenuAprobarAsync(ByVal user As String)
+            Me.MenuAprobarAsync(user, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub MenuAprobarAsync(ByVal user As String, ByVal userState As Object)
+            If (Me.MenuAprobarOperationCompleted Is Nothing) Then
+                Me.MenuAprobarOperationCompleted = AddressOf Me.OnMenuAprobarOperationCompleted
+            End If
+            Me.InvokeAsync("MenuAprobar", New Object() {user}, Me.MenuAprobarOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnMenuAprobarOperationCompleted(ByVal arg As Object)
+            If (Not (Me.MenuAprobarCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent MenuAprobarCompleted(Me, New MenuAprobarCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
         Public Shadows Sub CancelAsync(ByVal userState As Object)
             MyBase.CancelAsync(userState)
         End Sub
@@ -587,6 +651,33 @@ Namespace HorasExtras.Wsl
             Get
                 Me.RaiseExceptionIfNecessary
                 Return CType(Me.results(3),String)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub ValidarCredencialesNEWCompletedEventHandler(ByVal sender As Object, ByVal e As ValidarCredencialesNEWCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class ValidarCredencialesNEWCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As Boolean
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),Boolean)
             End Get
         End Property
     End Class
@@ -938,6 +1029,33 @@ Namespace HorasExtras.Wsl
             Get
                 Me.RaiseExceptionIfNecessary
                 Return CType(Me.results(0),System.Data.DataSet)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub MenuAprobarCompletedEventHandler(ByVal sender As Object, ByVal e As MenuAprobarCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class MenuAprobarCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As Boolean
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),Boolean)
             End Get
         End Property
     End Class

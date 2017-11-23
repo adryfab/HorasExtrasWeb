@@ -64,6 +64,15 @@
         End Set
     End Property
 
+    Public Property aprobar() As Boolean
+        Get
+            Return CType(ViewState("aprobar"), Boolean)
+        End Get
+        Set(ByVal Value As Boolean)
+            ViewState("aprobar") = Value
+        End Set
+    End Property
+
     Public Property sesionIni() As Boolean
         Get
             Return CType(ViewState("sesionIni"), Boolean)
@@ -135,6 +144,7 @@
         lblDep.Text = Me.Dep
         lblDepId.Text = Me.DepId
         idProcesar.Visible = procesar
+        idAprobar.Visible = aprobar
         lblAnio.Text = Me.Año
         lblPeriodo.Text = Me.Periodo
         lblInicio.Text = Me.Inicio

@@ -71,6 +71,7 @@ Public Class Procesar
         'Dim adAuth As LdapAuthentication = New LdapAuthentication("")
         Dim adAuth As New HorasExtras.Wsl.Seguridad()
         Master.procesar = adAuth.MenuProcesar(Master.areaId, Master.DepId, Master.CargoId)
+        Master.aprobar = adAuth.MenuAprobar(Master.codigo)
         Master.sesionIni = True
     End Sub
 

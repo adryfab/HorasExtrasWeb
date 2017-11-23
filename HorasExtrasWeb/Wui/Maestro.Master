@@ -25,8 +25,9 @@
         </header>
         <div class="w3-container">                        
             <div class="w3-bar w3-light-grey w3-border">
-                <a href="Registro.aspx" class="w3-bar-item w3-button w3-border w3-hover-indigo">Registrar</a>
-                <a href="Aprobacion.aspx" class="w3-bar-item w3-button w3-border w3-hover-indigo">Aprobar</a>
+                <a href="Registro.aspx" class="w3-bar-item w3-button w3-border w3-hover-indigo">Horas Extras</a>
+                <a href="Aprobacion.aspx" class="w3-bar-item w3-button w3-border w3-hover-indigo" id="idAprobar"
+                    runat="server" visible="false">Aprobar</a>
                 <a href="Procesar.aspx" class="w3-bar-item w3-button w3-border w3-hover-indigo" id="idProcesar" 
                     runat="server" visible="false">Procesar</a>
                 <a href="Login.aspx" class="w3-bar-item w3-button w3-border w3-hover-indigo w3-right" id="idInicio"
