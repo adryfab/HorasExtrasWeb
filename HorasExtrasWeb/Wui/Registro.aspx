@@ -70,7 +70,7 @@
         <table>
             <tr>
                 <td>
-                    <asp:Button ID="BtnAdd" runat="server" Text="Agregar Registro" />
+                    <asp:Button ID="BtnAdd" runat="server" Text="Agregar Registro" CssClass="w3-grey w3-text-aqua" />
                 </td>
                 <td>
                     <asp:ImageButton ID="btnPrint" runat="server" CommandName="Imprimir" ImageUrl="../icons/impresora.ico" ToolTipText="Imprimir" 
@@ -78,7 +78,7 @@
                     <asp:Button ID="btnPrint1" runat="server" Text="Imprimir" CssClass="submit" Width="100px" />
                 </td>
                 <td>
-                    <asp:Label ID="Label9" runat="server" Text="Es OBLIGATORIO imprimir y firmar las Horas Extras" CssClass="w3-tiny"/>
+                    <asp:Label ID="Label9" runat="server" Text="Es OBLIGATORIO imprimir y firmar las Horas Extras" CssClass="w3-tiny w3-purple"/>
                 </td>
                 <td>
                     <asp:Label ID="lblAprobado" runat="server" Text="Aprobado" Visible="false" class="w3-red"/>

@@ -416,6 +416,7 @@ Public Class Registro
     Private Sub MostrarNewRegistro()
         NewReg2.Visible = True
         BtnAdd.Enabled = False
+        btnPrint1.Enabled = False
     End Sub
 
     Protected Sub btnDeshacer_Click(sender As Object, e As ImageClickEventArgs) Handles btnDeshacer.Click
@@ -431,6 +432,7 @@ Public Class Registro
         Permisotxt.Text = Nothing
         RecuperarTxt.Text = Nothing
         BtnAdd.Enabled = True
+        btnPrint1.Enabled = True
         lblError.Text = Nothing
         lblError.Visible = False
         divError.Visible = False
