@@ -296,6 +296,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GrabarAtrasos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="infoXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GrabarAtrasosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GrabarAtrasosResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="ValidarCredencialesSoapIn">
@@ -400,6 +415,12 @@
   <wsdl:message name="RecuperarAtrasosSoapOut">
     <wsdl:part name="parameters" element="tns:RecuperarAtrasosResponse" />
   </wsdl:message>
+  <wsdl:message name="GrabarAtrasosSoapIn">
+    <wsdl:part name="parameters" element="tns:GrabarAtrasos" />
+  </wsdl:message>
+  <wsdl:message name="GrabarAtrasosSoapOut">
+    <wsdl:part name="parameters" element="tns:GrabarAtrasosResponse" />
+  </wsdl:message>
   <wsdl:portType name="SeguridadSoap">
     <wsdl:operation name="ValidarCredenciales">
       <wsdl:input message="tns:ValidarCredencialesSoapIn" />
@@ -468,6 +489,10 @@
     <wsdl:operation name="RecuperarAtrasos">
       <wsdl:input message="tns:RecuperarAtrasosSoapIn" />
       <wsdl:output message="tns:RecuperarAtrasosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GrabarAtrasos">
+      <wsdl:input message="tns:GrabarAtrasosSoapIn" />
+      <wsdl:output message="tns:GrabarAtrasosSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="SeguridadSoap" type="tns:SeguridadSoap">
@@ -625,6 +650,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GrabarAtrasos">
+      <soap:operation soapAction="http://www.loteria.com.ec/GrabarAtrasos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="SeguridadSoap12" type="tns:SeguridadSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -774,6 +808,15 @@
     </wsdl:operation>
     <wsdl:operation name="RecuperarAtrasos">
       <soap12:operation soapAction="http://www.loteria.com.ec/RecuperarAtrasos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GrabarAtrasos">
+      <soap12:operation soapAction="http://www.loteria.com.ec/GrabarAtrasos" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

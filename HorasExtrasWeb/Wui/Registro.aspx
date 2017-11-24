@@ -149,7 +149,7 @@
                     <asp:Label ID="Label4" runat="server" Text="Justificativo:"/>
                 </td>
                 <td>
-                    <asp:TextBox ID="DetalleTxt" runat="server" Width="200px"/>
+                    <asp:TextBox ID="DetalleTxt" runat="server" TextMode="MultiLine" Columns="60"/>
                 </td>
                 <td>
                     <asp:ImageButton ID="btnAgregar" runat="server" CommandName="Agregar" ImageUrl="../icons/guardar.ico" ToolTipText="Agregar" />
@@ -307,7 +307,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Justificativo">
                     <EditItemTemplate>
-                        <asp:TextBox ID="Justificativo" runat="server" Text='<%#Bind("Justificativo") %>' />
+                        <asp:TextBox ID="Justificativo" runat="server" Text='<%#Bind("Justificativo") %>' TextMode="MultiLine" Columns="90" Rows="3" />
                         <br>
                             <asp:Label ID="lblJustVal" runat="server" Text="" Visible="false"/>
                         </br>

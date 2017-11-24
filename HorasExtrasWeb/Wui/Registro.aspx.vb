@@ -393,6 +393,8 @@ Public Class Registro
             ActualizarTotales()
         Catch ex As Exception
             lblError.Text = ex.Message
+            lblError.Visible = True
+            divError.Visible = True
         End Try
     End Sub
 

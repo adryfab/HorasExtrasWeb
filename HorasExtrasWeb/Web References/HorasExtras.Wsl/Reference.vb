@@ -66,6 +66,8 @@ Namespace HorasExtras.Wsl
         
         Private RecuperarAtrasosOperationCompleted As System.Threading.SendOrPostCallback
         
+        Private GrabarAtrasosOperationCompleted As System.Threading.SendOrPostCallback
+        
         Private useDefaultCredentialsSetExplicitly As Boolean
         
         '''<remarks/>
@@ -154,6 +156,9 @@ Namespace HorasExtras.Wsl
         
         '''<remarks/>
         Public Event RecuperarAtrasosCompleted As RecuperarAtrasosCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event GrabarAtrasosCompleted As GrabarAtrasosCompletedEventHandler
         
         '''<remarks/>
         <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/ValidarCredenciales", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
@@ -614,6 +619,33 @@ Namespace HorasExtras.Wsl
             If (Not (Me.RecuperarAtrasosCompletedEvent) Is Nothing) Then
                 Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
                 RaiseEvent RecuperarAtrasosCompleted(Me, New RecuperarAtrasosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.loteria.com.ec/GrabarAtrasos", RequestNamespace:="http://www.loteria.com.ec/", ResponseNamespace:="http://www.loteria.com.ec/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function GrabarAtrasos(ByVal user As String, ByVal infoXml As String) As Integer
+            Dim results() As Object = Me.Invoke("GrabarAtrasos", New Object() {user, infoXml})
+            Return CType(results(0),Integer)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub GrabarAtrasosAsync(ByVal user As String, ByVal infoXml As String)
+            Me.GrabarAtrasosAsync(user, infoXml, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub GrabarAtrasosAsync(ByVal user As String, ByVal infoXml As String, ByVal userState As Object)
+            If (Me.GrabarAtrasosOperationCompleted Is Nothing) Then
+                Me.GrabarAtrasosOperationCompleted = AddressOf Me.OnGrabarAtrasosOperationCompleted
+            End If
+            Me.InvokeAsync("GrabarAtrasos", New Object() {user, infoXml}, Me.GrabarAtrasosOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnGrabarAtrasosOperationCompleted(ByVal arg As Object)
+            If (Not (Me.GrabarAtrasosCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent GrabarAtrasosCompleted(Me, New GrabarAtrasosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
         
@@ -1115,6 +1147,33 @@ Namespace HorasExtras.Wsl
             Get
                 Me.RaiseExceptionIfNecessary
                 Return CType(Me.results(0),System.Data.DataSet)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")>  _
+    Public Delegate Sub GrabarAtrasosCompletedEventHandler(ByVal sender As Object, ByVal e As GrabarAtrasosCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class GrabarAtrasosCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As Integer
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),Integer)
             End Get
         End Property
     End Class

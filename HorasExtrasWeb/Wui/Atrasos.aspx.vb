@@ -81,9 +81,87 @@
     Protected Sub GridView_RowCancelingEdit()
         'Reset the edit index.
         gvAtrasos.EditIndex = -1
-        'Bind data to the GridView control.
+        'Bind Data to the GridView control.
         BindDataGrid()
-        Llenar_Grid()
+        'Llenar_Grid()
     End Sub
+
+    Protected Sub GridView_RowUpdating(ByVal sender As Object, ByVal e As GridViewUpdateEventArgs)
+        Try
+            Dim dt As DataTable = CType(Session("dtAtrasos"), DataTable)
+            Dim row As GridViewRow = gvAtrasos.Rows(e.RowIndex)
+            Dim drow As DataRow = dt.Rows(row.DataItemIndex)
+
+            If ValidarJustificacionGrid(row) = False Then Exit Sub
+
+            'Actualizando el justificativo
+            drow("Justificativo") = (CType(row.FindControl("Justificativo"), TextBox)).Text
+
+            'Grabando el registro en la BD
+            Dim AtrasosId As Integer = GrabarRegistros(drow)
+            drow("AtrasosId") = AtrasosId
+
+            'Reset the edit index.
+            gvAtrasos.EditIndex = -1
+
+            'Bind data to the GridView control.
+            BindDataGrid()
+            Llenar_Grid()
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+            divError.Visible = True
+        End Try
+    End Sub
+
+    Private Function ValidarJustificacionGrid(ByVal row As GridViewRow) As Boolean
+        Dim justificacion As String = (CType(row.FindControl("Justificativo"), TextBox)).Text
+        Dim lblVal As Label = CType(row.FindControl("lblJustVal"), Label)
+        If justificacion = Nothing Or justificacion = "" Then
+            lblVal.Text = "FALTA!"
+            lblVal.Visible = True
+            Return False
+        Else
+            lblVal.Visible = False
+            Return True
+        End If
+    End Function
+
+    Private Function GrabarRegistros(ByVal rows As DataRow) As Integer
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
+        Dim AtrasosId As Integer
+        Dim infoXlm As String = infoXML(rows)
+        AtrasosId = SQLConexionBD.GrabarAtrasos(Master.codigo, infoXlm)
+        Return AtrasosId
+    End Function
+
+    Public Function infoXML(ByVal row As DataRow) As String
+        Dim cadenaXML As String = String.Empty
+
+        cadenaXML &= "<ATRASO "
+        cadenaXML &= "CODEMP=""" & Master.codigo & """ "
+        cadenaXML &= "ANIOPE=""" & Master.Año & """ "
+        cadenaXML &= "PERIOD=""" & Master.Periodo & """ "
+        Dim fecha As Date = row.Item("Fecha")
+        cadenaXML &= "FECHAM=""" & fecha.ToString("yyyy-MM-dd") & """ "
+        Dim ingreso As DateTime
+        If Not IsDBNull(row.Item("Ingreso")) Then
+            ingreso = row.Item("Ingreso")
+        Else
+            ingreso = fecha
+        End If
+        cadenaXML &= "INGRES=""" & ingreso.ToString("yyyy-MM-dd HH:mm") & """ "
+        Dim tiempo As DateTime = row.Item("Tiempo")
+        cadenaXML &= "TIEMPO=""" & tiempo.ToString("yyyy-MM-dd HH:mm") & """ "
+        cadenaXML &= "CODNOV=""" & row.Item("CodNov").ToString & """ "
+        cadenaXML &= "DETNOV=""" & row.Item("Tipo").ToString & """ "
+        cadenaXML &= "JUSTIF=""" & row.Item("Justificativo").ToString & """ "
+        cadenaXML &= "ACTIVO=""" & row.Item("Activo") & """ "
+        cadenaXML &= "BIOMET=""" & row.Item("Biometrico") & """ "
+        cadenaXML &= "ATRAID=""" & row.Item("AtrasosId").ToString & """ "
+        cadenaXML &= " /> "
+
+        Return cadenaXML
+    End Function
 
 End Class

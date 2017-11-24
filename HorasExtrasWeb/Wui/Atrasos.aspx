@@ -10,10 +10,14 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <div>
     </div>
+    <div runat="server" visible="false" id="divError">
+            <asp:Label ID="lblError" runat="server" Text="" Visible="false" CssClass="w3-panel w3-red"/>
+    </div>
     <div>
         <asp:GridView ID="gvAtrasos" runat="server" AutoGenerateColumns="False"
             OnRowEditing="GridView_RowEditing" 
-            OnRowCancelingEdit="GridView_RowCancelingEdit" 
+            OnRowCancelingEdit="GridView_RowCancelingEdit"
+            OnRowUpdating="GridView_RowUpdating" ShowHeaderWhenEmpty="True" 
                 >
             <HeaderStyle CssClass="w3-indigo w3-center w3-small" />
             <FooterStyle CssClass="w3-gray w3-center w3-small" />
@@ -69,16 +73,16 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Justificativo">
                     <EditItemTemplate>
-                        <asp:TextBox ID="Justificativo" runat="server" Text='<%#Bind("Justificativo") %>' />
+                        <asp:TextBox ID="Justificativo" runat="server" Text='<%#Bind("Justificativo") %>' TextMode="MultiLine" Columns="100" Rows="3"/>
                         <br>
                         <asp:Label ID="lblJustVal" runat="server" Text="" Visible="false"/>
                         </br>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Justificativo0" runat="server" Text='<%# Bind("Justificativo") %>' />
+                        <asp:Label ID="Justificativo" runat="server" Text='<%# Bind("Justificativo") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="AtrasosId" Visible="False">
+                <asp:TemplateField HeaderText="AtrasosId" Visible="false">
                     <ItemTemplate>
                         <asp:Label ID="AtrasosId" runat="server" Text='<%#Bind("AtrasosId") %>' />
                     </ItemTemplate>
