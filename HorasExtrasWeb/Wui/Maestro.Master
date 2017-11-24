@@ -30,6 +30,7 @@
                     runat="server" visible="false">Aprobar</a>
                 <a href="Procesar.aspx" class="w3-bar-item w3-button w3-border w3-hover-indigo" id="idProcesar" 
                     runat="server" visible="false">Procesar</a>
+                <a href="Atrasos.aspx" class="w3-bar-item w3-button w3-border w3-hover-indigo">Atrasos</a>
                 <a href="Login.aspx" class="w3-bar-item w3-button w3-border w3-hover-indigo w3-right" id="idInicio"
                     runat="server" visible="true">Iniciar Sesión</a>
                 <a href="Login.aspx" class="w3-bar-item w3-button w3-border w3-hover-indigo w3-right" id="idFin"

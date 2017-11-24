@@ -114,6 +114,7 @@
     </None>
     <None Include="Web References\HorasExtras.Wsl\Seguridad.disco" />
     <Content Include="Wui\Aprobacion.aspx" />
+    <Content Include="Wui\Atrasos.aspx" />
     <Content Include="Wui\ImprimirRegistro.aspx" />
     <Content Include="Wui\Login.aspx" />
     <Content Include="Wui\Procesar.aspx" />
@@ -131,6 +132,13 @@
     </Compile>
     <Compile Include="Wui\Aprobacion.aspx.vb">
       <DependentUpon>Aprobacion.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Wui\Atrasos.aspx.designer.vb">
+      <DependentUpon>Atrasos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Wui\Atrasos.aspx.vb">
+      <DependentUpon>Atrasos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Wui\ImprimirRegistro.aspx.designer.vb">
