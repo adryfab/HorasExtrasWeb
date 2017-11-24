@@ -13,6 +13,8 @@
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dsEmpleados As New DataSet
         Dim dtEmpleados As New DataTable
+        Dim dsTablas As New DataSet
+        Dim dtAtrasos As New DataTable
 
         Dim user As String
         If (Request.Cookies("Usuario") IsNot Nothing) Then
@@ -25,6 +27,14 @@
             Exit Sub
         End If
 
+        dsTablas = SQLConexionBD.RecuperarAtrasos(user)
+        If dsTablas Is Nothing Then
+            Exit Sub
+        End If
+        dtAtrasos = dsTablas.Tables(0)
+        Session("dtAtrasos") = dtAtrasos
+        BindDataGrid()
+
         'Datos del empleado
         dsEmpleados = SQLConexionBD.RecuperarDatosEmpleado(user)
         If dsEmpleados Is Nothing Then
@@ -32,6 +42,11 @@
         End If
         dtEmpleados = dsEmpleados.Tables(0)
         DatosEmpleados(dtEmpleados)
+    End Sub
+
+    Private Sub BindDataGrid()
+        gvAtrasos.DataSource = Session("dtAtrasos")
+        gvAtrasos.DataBind()
     End Sub
 
     Private Sub DatosEmpleados(ByVal dtEmpleado As DataTable)
@@ -53,6 +68,22 @@
         Master.procesar = adAuth.MenuProcesar(Master.areaId, Master.DepId, Master.CargoId)
         Master.aprobar = adAuth.MenuAprobar(Master.codigo)
         Master.sesionIni = True
+    End Sub
+
+    Protected Sub GridView_RowEditing(ByVal sender As Object, ByVal e As GridViewEditEventArgs)
+        'Set the edit index.
+        gvAtrasos.EditIndex = e.NewEditIndex
+
+        'Bind data to the GridView control.
+        BindDataGrid()
+    End Sub
+
+    Protected Sub GridView_RowCancelingEdit()
+        'Reset the edit index.
+        gvAtrasos.EditIndex = -1
+        'Bind data to the GridView control.
+        BindDataGrid()
+        Llenar_Grid()
     End Sub
 
 End Class

@@ -233,10 +233,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:55269/Seguridad.asmx">
+    <WebReferenceUrl Include="http://localhost:8070/Seguridad.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HorasExtras.Wsl\</RelPath>
-      <UpdateFromURL>http://localhost:55269/Seguridad.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost:8070/Seguridad.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

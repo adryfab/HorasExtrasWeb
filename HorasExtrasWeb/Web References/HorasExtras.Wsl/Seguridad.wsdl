@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.loteria.com.ec/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.loteria.com.ec/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.loteria.com.ec/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.loteria.com.ec/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.loteria.com.ec/">
       <s:element name="ValidarCredenciales">
@@ -275,6 +275,27 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="RecuperarAtrasos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperarAtrasosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RecuperarAtrasosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="ValidarCredencialesSoapIn">
@@ -373,6 +394,12 @@
   <wsdl:message name="MenuAprobarSoapOut">
     <wsdl:part name="parameters" element="tns:MenuAprobarResponse" />
   </wsdl:message>
+  <wsdl:message name="RecuperarAtrasosSoapIn">
+    <wsdl:part name="parameters" element="tns:RecuperarAtrasos" />
+  </wsdl:message>
+  <wsdl:message name="RecuperarAtrasosSoapOut">
+    <wsdl:part name="parameters" element="tns:RecuperarAtrasosResponse" />
+  </wsdl:message>
   <wsdl:portType name="SeguridadSoap">
     <wsdl:operation name="ValidarCredenciales">
       <wsdl:input message="tns:ValidarCredencialesSoapIn" />
@@ -437,6 +464,10 @@
     <wsdl:operation name="MenuAprobar">
       <wsdl:input message="tns:MenuAprobarSoapIn" />
       <wsdl:output message="tns:MenuAprobarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarAtrasos">
+      <wsdl:input message="tns:RecuperarAtrasosSoapIn" />
+      <wsdl:output message="tns:RecuperarAtrasosSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="SeguridadSoap" type="tns:SeguridadSoap">
@@ -578,6 +609,15 @@
     </wsdl:operation>
     <wsdl:operation name="MenuAprobar">
       <soap:operation soapAction="http://www.loteria.com.ec/MenuAprobar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarAtrasos">
+      <soap:operation soapAction="http://www.loteria.com.ec/RecuperarAtrasos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -732,13 +772,22 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RecuperarAtrasos">
+      <soap12:operation soapAction="http://www.loteria.com.ec/RecuperarAtrasos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Seguridad">
     <wsdl:port name="SeguridadSoap" binding="tns:SeguridadSoap">
-      <soap:address location="http://localhost:55269/Seguridad.asmx" />
+      <soap:address location="http://localhost:8070/Seguridad.asmx" />
     </wsdl:port>
     <wsdl:port name="SeguridadSoap12" binding="tns:SeguridadSoap12">
-      <soap12:address location="http://localhost:55269/Seguridad.asmx" />
+      <soap12:address location="http://localhost:8070/Seguridad.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
