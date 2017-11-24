@@ -79,7 +79,9 @@
             </b>
         </div>
         <div>
-            <asp:GridView ID="gvBiometrico50" runat="server" AutoGenerateColumns="False" ShowFooter="True">
+            <asp:GridView ID="gvBiometrico50" runat="server" AutoGenerateColumns="False" ShowFooter="True"
+                onRowDatabound="GridView_RowDataBound"
+                >
                 <HeaderStyle CssClass="w3-gray w3-tiny"/>
                 <FooterStyle CssClass="w3-center w3-tiny" Font-Bold="true" />
                 <Columns>
@@ -123,9 +125,14 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Justificativo de extensión de jornada">
+                    <asp:TemplateField HeaderText="Justificativo extensión jornada">
                         <ItemTemplate>
                             <asp:Label ID="Justificativo" runat="server" Text='<%# Bind("Justificativo") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Biometrico" Visible="false">
+                        <ItemTemplate>
+                            <asp:Label ID="Biometrico" runat="server" Text='<%# Bind("Biometrico") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -141,7 +148,9 @@
             </b>
         </div>
         <div>
-            <asp:GridView ID="gvBiometrico100" runat="server" AutoGenerateColumns="False" ShowFooter="True">
+            <asp:GridView ID="gvBiometrico100" runat="server" AutoGenerateColumns="False" ShowFooter="True"
+                onRowDatabound="GridView_RowDataBound"
+                >
                 <HeaderStyle CssClass="w3-gray w3-tiny" />
                 <FooterStyle CssClass="w3-center w3-tiny" Font-Bold="true" />
                 <Columns>
@@ -185,9 +194,14 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Justificativo extensión de jornada">
+                    <asp:TemplateField HeaderText="Justificativo extensión jornada">
                         <ItemTemplate>
                             <asp:Label ID="Justificativo" runat="server" Text='<%# Bind("Justificativo") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Biometrico" Visible="false">
+                        <ItemTemplate>
+                            <asp:Label ID="Biometrico" runat="server" Text='<%# Bind("Biometrico") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

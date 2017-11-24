@@ -49,6 +49,7 @@
         Session("dtJefes") = dtJefes
 
         BindDataGrid()
+        'CambiarEstilo()
         Cabecera()
         Totales()
     End Sub
@@ -58,6 +59,14 @@
         gvBiometrico50.DataBind()
         gvBiometrico100.DataSource = Session("dtExtra100")
         gvBiometrico100.DataBind()
+    End Sub
+
+    Private Sub CambiarEstilo()
+        For Each row As DataRow In gvBiometrico50.Rows
+            If row.Item("Biometrico") = 0 Then
+                'gvBiometrico50.Rows(row).Cells(c).Font.Bold = True 'o False
+            End If
+        Next
     End Sub
 
     Private Sub Cabecera()
@@ -95,8 +104,12 @@
             Next
 
             gvBiometrico50.FooterRow.Cells(4).Text = "Total Permiso"
-            gvBiometrico50.FooterRow.Cells(5).Text = String.Format("{0}:{1}", horPer + Fix(minPer / 60), minPer Mod 60)
-            gvBiometrico50.FooterRow.Cells(6).Text = String.Format("{0}:{1}", hor050 + Fix(min050 / 60), min050 Mod 60)
+            Dim fhorper As Integer = horPer + Fix(minPer / 60)
+            Dim fminper As Integer = minPer Mod 60
+            gvBiometrico50.FooterRow.Cells(5).Text = String.Format("{0}:{1}", fhorper.ToString("0"), fminper.ToString("00"))
+            Dim fHor050 As Integer = hor050 + Fix(min050 / 60)
+            Dim fMin050 As Integer = min050 Mod 60
+            gvBiometrico50.FooterRow.Cells(6).Text = String.Format("{0}:{1}", fHor050.ToString("0"), fMin050.ToString("00"))
 
             SumTotal050(min050, minPer, hor050, horPer)
 
@@ -121,8 +134,12 @@
             Next
 
             gvBiometrico100.FooterRow.Cells(4).Text = "Total Recuperar"
-            gvBiometrico100.FooterRow.Cells(5).Text = String.Format("{0}:{1}", horRec + Fix(minRec / 60), minRec Mod 60)
-            gvBiometrico100.FooterRow.Cells(6).Text = String.Format("{0}:{1}", hor100 + Fix(min100 / 60), min100 Mod 60)
+            Dim fHorRec As Integer = horRec + Fix(minRec / 60)
+            Dim fMinRec As Integer = minRec Mod 60
+            gvBiometrico100.FooterRow.Cells(5).Text = String.Format("{0}:{1}", fHorRec.ToString("0"), fMinRec.ToString("00"))
+            Dim fHor100 As Integer = hor100 + Fix(min100 / 60)
+            Dim fMin100 As Integer = min100 Mod 60
+            gvBiometrico100.FooterRow.Cells(6).Text = String.Format("{0}:{1}", fHor100.ToString("0"), fMin100.ToString("00"))
 
             SumTotal100(min100, minRec, hor100, horRec)
 
@@ -148,7 +165,11 @@
         cel0.Text = "Total de Horas al 50% al mes a pagar"
         cel0.ColumnSpan = 6
         cel0.HorizontalAlign = HorizontalAlign.Right
-        cel050.Text = String.Format("{0}:{1}", horTot050 + Fix(minTot050 / 60), minTot050 Mod 60)
+        Dim ftothor50 As Integer = horTot050 + Fix(minTot050 / 60)
+        Dim tothor50 As String = ftothor50.ToString("0")
+        Dim ftotmin50 As Integer = minTot050 Mod 60
+        Dim totmin50 As String = ftotmin50.ToString("00")
+        cel050.Text = String.Format("{0}:{1}", tothor50, totmin50)
         row.Cells.Add(cel0)
         row.Cells.Add(cel050)
         gvBiometrico50.Controls(0).Controls.Add(row)
@@ -171,11 +192,29 @@
         cel0.Text = "Total de Horas al 100% al mes a pagar"
         cel0.ColumnSpan = 6
         cel0.HorizontalAlign = HorizontalAlign.Right
-        cel100.Text = String.Format("{0}:{1}", horTot100 + Fix(minTot100 / 60), minTot100 Mod 60)
+        Dim ftothor100 As Integer = horTot100 + Fix(minTot100 / 60)
+        Dim tothor100 As String = ftothor100.ToString("0")
+        Dim ftotmin100 As Integer = minTot100 Mod 60
+        Dim totmin100 As String = ftotmin100.ToString("00")
+        cel100.Text = String.Format("{0}:{1}", tothor100, totmin100)
         row.Cells.Add(cel0)
         row.Cells.Add(cel100)
         gvBiometrico100.Controls(0).Controls.Add(row)
 
+    End Sub
+
+    Protected Sub GridView_RowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim desc As String = DataBinder.Eval(e.Row.DataItem, "Biometrico").ToString()
+            If desc = "0" Then
+                e.Row.Font.Italic = True
+                'e.Row.BorderStyle = BorderStyle.Ridge
+                e.Row.Font.Name = "Impact"
+            Else
+                e.Row.Font.Italic = False
+                e.Row.Font.Name = "Courier New"
+            End If
+        End If
     End Sub
 
 End Class
