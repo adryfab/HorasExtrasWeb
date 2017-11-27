@@ -23,6 +23,33 @@ Partial Public Class Aprobacion
     Protected WithEvents id01 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''Control ScriptManager1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
+    '''Control TabContainer1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TabContainer1 As Global.AjaxControlToolkit.TabContainer
+    
+    '''<summary>
+    '''Control TabPanel1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TabPanel1 As Global.AjaxControlToolkit.TabPanel
+    
+    '''<summary>
     '''Control gvAprobar.
     '''</summary>
     '''<remarks>
@@ -48,6 +75,24 @@ Partial Public Class Aprobacion
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents gvBiometrico As Global.System.Web.UI.WebControls.GridView
+    
+    '''<summary>
+    '''Control TabPanel2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TabPanel2 As Global.AjaxControlToolkit.TabPanel
+    
+    '''<summary>
+    '''Control gvAtrasos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvAtrasos As Global.System.Web.UI.WebControls.GridView
     
     '''<summary>
     '''Propiedad Master.

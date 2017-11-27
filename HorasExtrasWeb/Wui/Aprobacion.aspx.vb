@@ -12,12 +12,12 @@
 #Region "Manejo de Datos"
 
     Private Sub Llenar_Grid()
-        'Dim SQLConexionBD As New SQLConexionBD()
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dtEmpleado As New DataTable
         Dim dsTablas As New DataSet
         Dim dtAprobaciones As New DataTable
         Dim dsEmpleados As New DataSet
+        Dim dtAtrasos As New DataTable
 
         Dim user As String
         If (Request.Cookies("Usuario") IsNot Nothing) Then
@@ -38,13 +38,24 @@
         dtEmpleado = dsEmpleados.Tables(0)
         DatosEmpleado(dtEmpleado)
 
+        'Aprobaciones de Horas Extras
         dsTablas = SQLConexionBD.RecuperarAprobaciones(user)
         If dsTablas Is Nothing Or dsTablas.Tables.Count = 0 Then
             Exit Sub
         End If
         dtAprobaciones = dsTablas.Tables(0)
-
         Session("dtAprobaciones") = dtAprobaciones
+
+        dsTablas = Nothing
+
+        'Aprobaciones de Atrasos
+        dsTablas = SQLConexionBD.RecuperarAtrasos(user)
+        If dsTablas Is Nothing Then
+            Exit Sub
+        End If
+        dtAtrasos = dsTablas.Tables(0)
+        Session("dtAtrasos") = dtAtrasos
+
         BindDataGrid()
     End Sub
 
@@ -62,7 +73,6 @@
         Master.Cargo = dtEmpleado.Rows(0)("Cargo")
         Master.CargoId = dtEmpleado.Rows(0)("CargoId")
 
-        'Dim adAuth As LdapAuthentication = New LdapAuthentication("")
         Dim adAuth As New HorasExtras.Wsl.Seguridad()
         Master.procesar = adAuth.MenuProcesar(Master.areaId, Master.DepId, Master.CargoId)
         Master.aprobar = adAuth.MenuAprobar(Master.codigo)
@@ -72,6 +82,8 @@
     Private Sub BindDataGrid()
         gvAprobar.DataSource = Session("dtAprobaciones")
         gvAprobar.DataBind()
+        gvAtrasos.DataSource = Session("dtAtrasos")
+        gvAtrasos.DataBind()
     End Sub
 
     Protected Sub OnConfirm(ByVal sender As Object, ByVal e As EventArgs)
@@ -79,7 +91,6 @@
         If confirmValue = "Si" Then
             'Get the button that raised the event
             Dim btn As ImageButton = DirectCast(sender, ImageButton)
-
             'Get the row that contains this button
             Dim row As GridViewRow = DirectCast(btn.NamingContainer, GridViewRow)
 
@@ -88,7 +99,6 @@
 
             If btn.ID = "ButtonAprobar" Then
                 'Validar Si están todos los registros justificados
-                'Dim SQLConexionBD As New SQLConexionBD()
                 Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
                 If SQLConexionBD.ValidarJustificacion(rows.Item("NOMINA_ID")) = False Then
                     'Mostrar mensaje
@@ -130,13 +140,54 @@
         End If
     End Sub
 
+    Protected Sub OnConfirmAtraso(ByVal sender As Object, ByVal e As EventArgs)
+        Dim confirmValue As String = Request.Form("confirm_value")
+        If confirmValue = "Si" Then
+            'Get the button that raised the event
+            Dim btn As ImageButton = DirectCast(sender, ImageButton)
+            'Get the row that contains this button
+            Dim row As GridViewRow = DirectCast(btn.NamingContainer, GridViewRow)
+
+            Dim dt As DataTable = CType(Session("dtAtrasos"), DataTable)
+            Dim rows As DataRow = dt.Rows(row.DataItemIndex)
+
+            If rows.Item("Justificativo") = "" Then
+                'Mostrar mensaje
+                id01.Visible = True
+                id01.Style.Item("display") = "block"
+                Exit Sub
+            Else
+                'Ocultar mensaje
+                id01.Visible = False
+                id01.Style.Item("display") = "none"
+            End If
+
+            If btn.ID = "ButtonAprobar" Then
+                rows.Item("Aprobado") = True
+            ElseIf btn.ID = "ButtonRechazar" Then
+                rows.Item("Aprobado") = False
+            End If
+
+            If GrabarAtrasos(rows) = 1 Then 'OK
+                Llenar_Grid()
+            End If
+        End If
+    End Sub
+
     Private Function GrabarRegistros(ByVal rows As DataRow) As Integer
-        'Dim SQLConexionBD As New SQLConexionBD()
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim Resultados As Integer
         Dim infoXlm As String = infoXML(rows)
         Resultados = SQLConexionBD.GrabarAprobacion(infoXlm)
         Return Resultados
+    End Function
+
+    Private Function GrabarAtrasos(ByVal rows As DataRow) As Integer
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
+        Dim AtrasosId As Integer
+        Dim infoXlm As String = infoAtrasosXML(rows)
+        AtrasosId = SQLConexionBD.GrabarAtrasos(Master.codigo, infoXlm)
+        Return AtrasosId
     End Function
 
     Public Function infoXML(ByVal row As DataRow) As String
@@ -164,6 +215,36 @@
         Else
             cadenaXML &= "FECJEF=""" & row.Item("FechaJefe").ToString & """ "
         End If
+        cadenaXML &= " /> "
+
+        Return cadenaXML
+    End Function
+
+    Public Function infoAtrasosXML(ByVal row As DataRow) As String
+        Dim cadenaXML As String = String.Empty
+
+        cadenaXML &= "<ATRASO "
+        cadenaXML &= "CODEMP=""" & Master.codigo & """ "
+        cadenaXML &= "ANIOPE=""" & Master.Año & """ "
+        cadenaXML &= "PERIOD=""" & Master.Periodo & """ "
+        Dim fecha As Date = row.Item("Fecha")
+        cadenaXML &= "FECHAM=""" & fecha.ToString("yyyy-MM-dd") & """ "
+        Dim ingreso As DateTime
+        If Not IsDBNull(row.Item("Ingreso")) Then
+            ingreso = row.Item("Ingreso")
+        Else
+            ingreso = fecha
+        End If
+        cadenaXML &= "INGRES=""" & ingreso.ToString("yyyy-MM-dd HH:mm") & """ "
+        Dim tiempo As DateTime = row.Item("Tiempo")
+        cadenaXML &= "TIEMPO=""" & tiempo.ToString("yyyy-MM-dd HH:mm") & """ "
+        cadenaXML &= "CODNOV=""" & row.Item("CodNov").ToString & """ "
+        cadenaXML &= "DETNOV=""" & row.Item("Tipo").ToString & """ "
+        cadenaXML &= "JUSTIF=""" & row.Item("Justificativo").ToString & """ "
+        cadenaXML &= "ACTIVO=""" & row.Item("Activo") & """ "
+        cadenaXML &= "BIOMET=""" & row.Item("Biometrico") & """ "
+        cadenaXML &= "ATRAID=""" & row.Item("AtrasosId").ToString & """ "
+        cadenaXML &= "APROBA=""" & row.Item("Aprobado") & """ "
         cadenaXML &= " /> "
 
         Return cadenaXML
@@ -255,6 +336,24 @@
         End If
     End Sub
 
+    Protected Sub GridViewAtrasos_RowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim imgAprobar As ImageButton = TryCast(e.Row.Cells(14).Controls(1), ImageButton)
+            Dim imgRechazar As ImageButton = TryCast(e.Row.Cells(14).Controls(3), ImageButton)
+            Dim lblAprobado As Label = TryCast(e.Row.Cells(15).Controls(1), Label)
+            If DirectCast(e.Row.Cells(13).Controls(1), System.Web.UI.WebControls.Label).Text = "1" Then 'Aprobado
+                imgAprobar.Visible = False
+                imgRechazar.Visible = True
+                lblAprobado.Visible = True
+                lblAprobado.Text = "Aprobado"
+            Else
+                imgAprobar.Visible = True
+                imgRechazar.Visible = False
+                lblAprobado.Visible = True
+                lblAprobado.Text = "Por Aprobar"
+            End If
+        End If
+    End Sub
 #End Region
 
 End Class
