@@ -159,6 +159,7 @@
         cadenaXML &= "ACTIVO=""" & row.Item("Activo") & """ "
         cadenaXML &= "BIOMET=""" & row.Item("Biometrico") & """ "
         cadenaXML &= "ATRAID=""" & row.Item("AtrasosId").ToString & """ "
+        cadenaXML &= "APROBA=""" & row.Item("Aprobado") & """ "
         cadenaXML &= " /> "
 
         Return cadenaXML
