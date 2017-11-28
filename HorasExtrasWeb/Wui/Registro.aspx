@@ -172,22 +172,18 @@
                 <td>
                 </td>
                 <td class="w3-tiny w3-text-red">
-                    <%--<asp:RequiredFieldValidator ID="ValIngreso" runat="server" ErrorMessage="Vacío" ControlToValidate="IngresoTxt"/>--%>
                 </td>
                 <td>
                 </td>
                 <td class="w3-tiny w3-text-red">
-                    <%--<asp:RequiredFieldValidator ID="ValSalida" runat="server" ErrorMessage="Vacío" ControlToValidate="SalidaTxt"/>--%>
                 </td>
                 <td>
                 </td>
                 <td class="w3-tiny w3-text-red">
-                    <%--<asp:RequiredFieldValidator ID="ValPermiso" runat="server" ErrorMessage="Vacío" ControlToValidate="Permisotxt"/>--%>
                 </td>
                 <td>
                 </td>
                 <td class="w3-tiny w3-text-red">
-                    <%--<asp:RequiredFieldValidator ID="ValRecuperar" runat="server" ErrorMessage="Vacío" ControlToValidate="RecuperarTxt"/>--%>
                 </td>
                 <td class="w3-tiny w3-text-red">
                     <asp:RequiredFieldValidator ID="ValJustifica" runat="server" ErrorMessage="Escriba" ControlToValidate="DetalleTxt"/>

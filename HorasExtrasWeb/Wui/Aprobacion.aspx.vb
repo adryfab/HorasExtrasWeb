@@ -251,7 +251,6 @@
     End Function
 
     Private Sub Llenar_Grid_Detalle(ByVal index As Integer, ByVal user As String)
-        'Dim SQLConexionBD As New SQLConexionBD()
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dtBiometrico As New DataTable
         Dim dsTablas As New DataSet

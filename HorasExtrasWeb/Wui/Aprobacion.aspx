@@ -116,7 +116,7 @@
                                         <asp:Label ID="SUPERVISOR" runat="server" Text='<%#Bind("SUPERVISOR") %>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="Center" Visible="false">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="ButtonAprobar" runat="server" CommandName="aprobar" ImageUrl="../icons/aceptar.ico"
                                             OnClick="OnConfirm" OnClientClick="Confirm()"/>
@@ -124,7 +124,7 @@
                                             OnClick="OnConfirm" OnClientClick="Confirm()" Visible="false"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Estado">
+                                <asp:TemplateField HeaderText="Estado" Visible="false">
                                     <ItemTemplate>
                                         <asp:Label ID="lblAprobado" runat="server" Text="Aprobado" Visible="false"/>
                                     </ItemTemplate>
@@ -137,7 +137,7 @@
                             <td>
                                 <div>
                                     <asp:GridView ID="gvBiometrico" runat="server" AutoGenerateColumns="False">
-                                        <HeaderStyle CssClass="w3-indigo" />
+                                        <HeaderStyle CssClass="w3-indigo w3-center w3-small" />
                                         <AlternatingRowStyle CssClass="w3-light-grey" />
                                         <Columns>
                                             <asp:TemplateField HeaderText="Codigo" Visible="False">
@@ -170,17 +170,29 @@
                                                     <asp:Label ID="HoraLab" runat="server" Text='<%#Bind("Laborado", "{0: H:mm}") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Atrasado" ItemStyle-HorizontalAlign="Center">
+                                            <asp:TemplateField HeaderText="Atrasado" ItemStyle-HorizontalAlign="Center" Visible="false">
                                                 <ItemTemplate>
                                                     <asp:Label ID="HoraAtr" runat="server" Text='<%#Bind("Atrasado", "{0: H:mm}") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Anticipado" ItemStyle-HorizontalAlign="Center">
+                                            <asp:TemplateField HeaderText="Anticipado" ItemStyle-HorizontalAlign="Center" Visible="false">
                                                 <ItemTemplate>
                                                     <asp:Label ID="HoraAnt" runat="server" Text='<%#Bind("Anticipado", "{0: H:mm}") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="0%" ItemStyle-HorizontalAlign="Center">
+                                            <asp:TemplateField HeaderText="Permiso" ItemStyle-HorizontalAlign="Center">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="HorasPermiso" runat="server" Text='<%#Bind("HorasPermiso", "{0: H:mm}") %>' />
+                                                </ItemTemplate>
+                                                <ItemStyle HorizontalAlign="Center"/>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Recuperar" ItemStyle-HorizontalAlign="Center">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="HorasRecuperar" runat="server" Text='<%#Bind("HorasRecuperar", "{0: H:mm}") %>' />
+                                                </ItemTemplate>
+                                                <ItemStyle HorizontalAlign="Center"/>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="0%" ItemStyle-HorizontalAlign="Center" Visible="false">
                                                 <ItemTemplate>
                                                     <asp:Label ID="Hora0" runat="server" Text='<%#Bind("Horas0", "{0: H:mm}") %>' />
                                                 </ItemTemplate>
@@ -218,6 +230,24 @@
                                             <asp:TemplateField HeaderText="Activo" Visible="False">
                                                 <ItemTemplate>
                                                     <asp:Label ID="Activo" runat="server" Text='<%#Bind("Activo") %>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Biometrico" Visible="False">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="Biometrico" runat="server" Text='<%#Bind("Biometrico") %>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="Center" >
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="ButtonAprobar" runat="server" CommandName="aprobar" ImageUrl="../icons/aceptar.ico"
+                                                        OnClick="OnConfirm" OnClientClick="Confirm()"/>
+                                                    <asp:ImageButton ID="ButtonRechazar" runat="server" CommandName="rechazar" ImageUrl="../icons/rechazar.ico"
+                                                        OnClick="OnConfirm" OnClientClick="Confirm()" Visible="false"/>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Estado" >
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblAprobado" runat="server" Text="Aprobado" Visible="false"/>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>
