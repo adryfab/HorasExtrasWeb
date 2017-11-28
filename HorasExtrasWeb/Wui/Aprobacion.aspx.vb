@@ -112,7 +112,6 @@
                 End If
 
                 If rows.Item("SUPERVISOR") = "True" Then
-                    'rows.Item("UsuarioSuper") = lblUsuario.Text
                     rows.Item("UsuarioSuper") = Master.usuario
                     rows.Item("FechaSuper") = DateTime.Now.ToShortDateString
                 Else
@@ -203,7 +202,7 @@
             End If
 
             If GrabarDetalles(rows) = 1 Then 'OK
-                Llenar_Grid_Detalle(row.DataItemIndex, rows.Item("CodigoEmp"))
+                Llenar_Grid_Detalle(rows.Item("CodigoEmp"))
             End If
 
         End If
@@ -332,7 +331,7 @@
         Return cadenaXML
     End Function
 
-    Private Sub Llenar_Grid_Detalle(ByVal index As Integer, ByVal user As String)
+    Private Sub Llenar_Grid_Detalle(ByVal user As String)
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dtBiometrico As New DataTable
         Dim dsTablas As New DataSet
@@ -340,12 +339,15 @@
         dsTablas = SQLConexionBD.RecuperarDatosBiometricoPorUsuario(user)
         dtBiometrico = dsTablas.Tables(0)
         Session("dtBiometrico") = dtBiometrico
-        BindDataGridDetalle(index)
+        BindDataGridDetalle()
     End Sub
 
-    Private Sub BindDataGridDetalle(ByVal index As Integer)
+    Private Sub BindDataGridDetalle()
         gvBiometrico.DataSource = Session("dtBiometrico")
         gvBiometrico.DataBind()
+    End Sub
+
+    Private Sub CambiarPlusMinus(ByVal index As Integer)
         id01.Visible = False
         id01.Style.Item("display") = "none"
 
@@ -382,6 +384,14 @@
         Return Nothing
     End Function
 
+    Private Function EliminarRegistros(ByVal rows As DataRow) As Integer
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
+        Dim Resultados As Integer
+        Dim infoXlm As String = infoDetalleXML(rows)
+        Resultados = SQLConexionBD.EliminarRegistro(Context.User.Identity.Name, infoXlm)
+        Return Resultados
+    End Function
+
 #End Region
 
 #Region "Eventos del GridView"
@@ -392,7 +402,8 @@
             rowIndex = Integer.Parse(e.CommandArgument.ToString)
             Dim gvRow As GridViewRow = gvAprobar.Rows(rowIndex)
             Dim NOMINA_ID As Label = CType(gvRow.FindControl("NOMINA_ID"), Label)
-            Llenar_Grid_Detalle(rowIndex, NOMINA_ID.Text)
+            Llenar_Grid_Detalle(NOMINA_ID.Text)
+            CambiarPlusMinus(rowIndex)
         End If
     End Sub
 
@@ -438,10 +449,10 @@
 
     Protected Sub GridViewDetalle_RowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
         If e.Row.RowType = DataControlRowType.DataRow Then
-            Dim imgAprobar As ImageButton = TryCast(e.Row.Cells(19).Controls(1), ImageButton)
-            Dim imgRechazar As ImageButton = TryCast(e.Row.Cells(19).Controls(3), ImageButton)
-            Dim lblAprobado As Label = TryCast(e.Row.Cells(20).Controls(1), Label)
-            If DirectCast(e.Row.Cells(21).Controls(1), System.Web.UI.WebControls.Label).Text = "True" Then 'Aprobado
+            Dim imgAprobar As ImageButton = TryCast(e.Row.Cells(20).Controls(1), ImageButton)
+            Dim imgRechazar As ImageButton = TryCast(e.Row.Cells(20).Controls(3), ImageButton)
+            Dim lblAprobado As Label = TryCast(e.Row.Cells(21).Controls(1), Label)
+            If DirectCast(e.Row.Cells(22).Controls(1), System.Web.UI.WebControls.Label).Text = "True" Then 'Aprobado
                 imgAprobar.Visible = False
                 imgRechazar.Visible = True
                 lblAprobado.Visible = True
@@ -454,6 +465,25 @@
             End If
         End If
     End Sub
+
+    Protected Sub GridView_RowDeleting(ByVal sender As Object, ByVal e As GridViewDeleteEventArgs)
+        Dim DTable As New DataTable("dtBiometrico")
+        DTable = Session("dtBiometrico")
+        DTable.Rows(e.RowIndex)("Activo") = False
+        Dim rows As DataRow = DTable.Rows(e.RowIndex)
+        Dim codEmp As String = rows.Item("CodigoEmp")
+        Dim horasExtrasId As Integer = DTable.Rows(e.RowIndex)("HorasExtrasId")
+        Dim Resultado As Integer
+        If horasExtrasId = 0 Then 'Es nuevo
+            Resultado = GrabarRegistros(rows)
+        Else
+            Resultado = EliminarRegistros(rows)
+        End If
+        DTable.Rows(e.RowIndex).Delete()
+        Session("dtBiometrico") = DTable
+        Llenar_Grid_Detalle(codEmp)
+    End Sub
+
 #End Region
 
 End Class

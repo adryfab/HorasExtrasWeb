@@ -96,7 +96,6 @@ Public Class Registro
     End Function
 
     Private Function EliminarRegistros(ByVal rows As DataRow) As Integer
-        'Dim SQLConexionBD As New SQLConexionBD()
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim Resultados As Integer
         Dim infoXlm As String = infoXML(rows)
