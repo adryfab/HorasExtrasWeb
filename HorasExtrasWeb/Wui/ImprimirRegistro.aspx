@@ -58,25 +58,21 @@
             </table>
         </div>
         <br />
-        <div class="w3-border w3-tiny">
-            <b>
-                <asp:Label ID="Label8" runat="server">
-                Solicito se sirva autorizar el pago de las horas suplementarias/extraordinarias del período indicado, de acuerdo al 
-                detalle de permisos por recuperar y al registro de ingresos y salidas correspondientes administrado por Desarrollo Humano; 
-                todo esto en apego a lo establecido por el Código del Trabajo, el Reglamento Interno de Trabajo y la política corporativa 
-                vigente. Los periodos de tiempo otorgados como "permisos recuperables" (Registro de Salida de Personal) serán descontados 
-                de las jornadas extendidas, siempre que corresponda. 
-                </asp:Label>
-            </b>
+        <div class="w3-border">
+            <asp:Label ID="Label8" runat="server" Font-Size="6pt">
+            Solicito se sirva autorizar el pago de las horas suplementarias/extraordinarias del período indicado, de acuerdo al 
+            detalle de permisos por recuperar y al registro de ingresos y salidas correspondientes administrado por Desarrollo Humano; 
+            todo esto en apego a lo establecido por el Código del Trabajo, el Reglamento Interno de Trabajo y la política corporativa 
+            vigente. Los periodos de tiempo otorgados como "permisos recuperables" (Registro de Salida de Personal) serán descontados 
+            de las jornadas extendidas, siempre que corresponda. 
+            </asp:Label>
         </div>
         <br />
         <div class="w3-border w3-tiny">
-            <b>
-                <asp:Label ID="lblSuplementario" runat="server">
-                    DIAS AUTORIZADOS PARA LABORAR HORAS SUPLEMENTARIAS (fuera de la jornada legal de trabajo a partir de 17:30, 
-                    máximo 48 horas) CÓDIGO DEL TRABAJO
-                </asp:Label>
-            </b>
+            <asp:Label ID="lblSuplementario" runat="server">
+                DIAS AUTORIZADOS PARA LABORAR HORAS SUPLEMENTARIAS (fuera de la jornada legal de trabajo a partir de 17:30, 
+                máximo 48 horas) CÓDIGO DEL TRABAJO
+            </asp:Label>
         </div>
         <div>
             <asp:GridView ID="gvBiometrico50" runat="server" AutoGenerateColumns="False" ShowFooter="True"
@@ -107,7 +103,7 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Total horas trabajadas" ItemStyle-HorizontalAlign="Center">
+                    <asp:TemplateField HeaderText="Total horas" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:Label ID="HoraLab" runat="server" Text='<%#Bind("Laborado", "{0: H:mm}") %>' />
                         </ItemTemplate>
@@ -141,11 +137,9 @@
         </div>
         <br />
         <div class="w3-border w3-tiny">
-            <b>
-                <asp:Label ID="lblExtra" runat="server">
-                    DIAS AUTORIZADOS PARA LABORAR HORAS EXTRAORDINARIAS (días feriados, y fines de semana, máximo  24 horas) CÓDIGO DEL TRABAJO
-                </asp:Label>
-            </b>
+            <asp:Label ID="lblExtra" runat="server">
+                DIAS AUTORIZADOS PARA LABORAR HORAS EXTRAORDINARIAS (días feriados, y fines de semana, máximo  24 horas) CÓDIGO DEL TRABAJO
+            </asp:Label>
         </div>
         <div>
             <asp:GridView ID="gvBiometrico100" runat="server" AutoGenerateColumns="False" ShowFooter="True"
@@ -176,7 +170,7 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Total horas trabajadas" ItemStyle-HorizontalAlign="Center">
+                    <asp:TemplateField HeaderText="Total horas" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:Label ID="HoraLab" runat="server" Text='<%#Bind("Laborado", "{0: H:mm}") %>' />
                         </ItemTemplate>
@@ -241,21 +235,22 @@
             </table>
         </div>
         <br />
-        <div class="w3-center w3-gray w3-tiny">
+        <div class="w3-center w3-gray">
             <b>
-                <asp:Label ID="Label16" runat="server" Text="Nota:" />
-                <br />
-                <asp:Label ID="Label15" runat="server">
-                Entregar con la firma de aprobación de la Gerencia/Jefatura respectiva en Desarrollo Humano para procesamiento, 
-                hasta la fecha del mes que corresponda; caso contrario no procederá el pago respectivo.
-                </asp:Label>
+                <asp:Label ID="Label16" runat="server" Text="Nota:" Font-Size="8pt" />
             </b>
+            <br />
+            <asp:Label ID="Label15" runat="server" Font-Size="7pt">
+            Entregar con la firma de aprobación de la Gerencia/Jefatura respectiva en Desarrollo Humano para procesamiento, 
+            hasta la fecha del mes que corresponda; caso contrario no procederá el pago respectivo.
+            </asp:Label>
         </div>
         <br />
         <div class="w3-border">
-            <div class="w3-center w3-small">
+            <div class="w3-center">
                 <b>
-                    <asp:Label ID="Label17" runat="server" Text="ESPACIO RESERVADO PARA EL DPTO. DE DESARROLLO HUMANO" /></b>
+                    <asp:Label ID="Label17" runat="server" Text="ESPACIO RESERVADO PARA EL DPTO. DE DESARROLLO HUMANO" Font-Size="Smaller" />
+                </b>
             </div>
             <asp:Label ID="Label18" runat="server" Text="Observaciones:" CssClass="w3-tiny"/>
             <br />
