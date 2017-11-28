@@ -165,4 +165,16 @@
         Return cadenaXML
     End Function
 
+    Protected Sub GridView_RowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            'Desaparece botones si esta aprobado
+            Dim imgEdit As ImageButton = TryCast(e.Row.Cells(1).Controls(1), ImageButton)
+            Dim lbAprobado As Label = TryCast(e.Row.Cells(14).Controls(1), Label)
+            If lbAprobado.Text = "1" Then 'SI Aprobado
+                imgEdit.Visible = False
+            Else 'NO Aprobado
+                imgEdit.Visible = True
+            End If
+        End If
+    End Sub
 End Class

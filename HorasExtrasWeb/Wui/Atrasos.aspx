@@ -18,6 +18,7 @@
             OnRowEditing="GridView_RowEditing" 
             OnRowCancelingEdit="GridView_RowCancelingEdit"
             OnRowUpdating="GridView_RowUpdating" ShowHeaderWhenEmpty="True" 
+            onRowDatabound="GridView_RowDataBound"
                 >
             <HeaderStyle CssClass="w3-indigo w3-center w3-small" />
             <FooterStyle CssClass="w3-gray w3-center w3-small" />
@@ -34,7 +35,6 @@
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:ImageButton ID="ButtonEdit" runat="server" CommandName="Edit" ImageUrl="../icons/editar.ico" ToolTipText="Modificar" />
-                        <%--<asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" ImageUrl="../icons/eliminar.ico" ToolTipText="Elminar" />--%>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Dia">
