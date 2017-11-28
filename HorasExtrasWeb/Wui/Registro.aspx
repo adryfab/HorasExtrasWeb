@@ -337,6 +337,11 @@
                         <asp:Label ID="Biometrico" runat="server" Text='<%#Bind("Biometrico") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="Aprobado" Visible="False">
+                    <ItemTemplate>
+                        <asp:Label ID="Aprobado" runat="server" Text='<%#Bind("Aprobado") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
     </div>

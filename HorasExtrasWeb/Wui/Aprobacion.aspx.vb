@@ -174,6 +174,41 @@
         End If
     End Sub
 
+    Protected Sub OnConfirmDetalle(ByVal sender As Object, ByVal e As EventArgs)
+        Dim confirmValue As String = Request.Form("confirm_value")
+        If confirmValue = "Si" Then
+            'Get the button that raised the event
+            Dim btn As ImageButton = DirectCast(sender, ImageButton)
+            'Get the row that contains this button
+            Dim row As GridViewRow = DirectCast(btn.NamingContainer, GridViewRow)
+
+            Dim dt As DataTable = CType(Session("dtBiometrico"), DataTable)
+            Dim rows As DataRow = dt.Rows(row.DataItemIndex)
+
+            If rows.Item("Justificativo") = "" Then
+                'Mostrar mensaje
+                id01.Visible = True
+                id01.Style.Item("display") = "block"
+                Exit Sub
+            Else
+                'Ocultar mensaje
+                id01.Visible = False
+                id01.Style.Item("display") = "none"
+            End If
+
+            If btn.ID = "ButtonAprobar" Then
+                rows.Item("Aprobado") = True
+            ElseIf btn.ID = "ButtonRechazar" Then
+                rows.Item("Aprobado") = False
+            End If
+
+            If GrabarDetalles(rows) = 1 Then 'OK
+                Llenar_Grid_Detalle(row.DataItemIndex, rows.Item("CodigoEmp"))
+            End If
+
+        End If
+    End Sub
+
     Private Function GrabarRegistros(ByVal rows As DataRow) As Integer
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim Resultados As Integer
@@ -188,6 +223,14 @@
         Dim infoXlm As String = infoAtrasosXML(rows)
         AtrasosId = SQLConexionBD.GrabarAtrasos(Master.codigo, infoXlm)
         Return AtrasosId
+    End Function
+
+    Private Function GrabarDetalles(ByVal rows As DataRow) As Integer
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
+        Dim HorasExtrasId As Integer
+        Dim infoXlm As String = infoDetalleXML(rows)
+        HorasExtrasId = SQLConexionBD.GrabarRegisto(Context.User.Identity.Name, infoXlm)
+        Return HorasExtrasId
     End Function
 
     Public Function infoXML(ByVal row As DataRow) As String
@@ -244,6 +287,45 @@
         cadenaXML &= "ACTIVO=""" & row.Item("Activo") & """ "
         cadenaXML &= "BIOMET=""" & row.Item("Biometrico") & """ "
         cadenaXML &= "ATRAID=""" & row.Item("AtrasosId").ToString & """ "
+        cadenaXML &= "APROBA=""" & row.Item("Aprobado") & """ "
+        cadenaXML &= " /> "
+
+        Return cadenaXML
+    End Function
+
+    Public Function infoDetalleXML(ByVal row As DataRow) As String
+        Dim cadenaXML As String = String.Empty
+
+        cadenaXML &= "<HOREXT "
+        cadenaXML &= "CODEMP=""" & Master.codigo & """ "
+        Dim fecha As Date = row.Item("Fecha")
+        cadenaXML &= "FECHAM=""" & fecha.ToString("yyyy-MM-dd") & """ "
+        Dim ingreso As DateTime = row.Item("Ingreso")
+        cadenaXML &= "INGRES=""" & ingreso.ToString("HH:mm") & """ "
+        Dim salida As DateTime = row.Item("Salida")
+        cadenaXML &= "SALIDA=""" & salida.ToString("HH:mm") & """ "
+        Dim laborado As DateTime = row.Item("Laborado")
+        cadenaXML &= "LABORA=""" & laborado.ToString("HH:mm") & """ "
+        Dim atrasado As DateTime = row.Item("Atrasado")
+        cadenaXML &= "ATRASA=""" & atrasado.ToString("HH:mm") & """ "
+        Dim anticipado As DateTime = row.Item("Anticipado")
+        cadenaXML &= "ANTICI=""" & anticipado.ToString("HH:mm") & """ "
+        Dim hora0 As DateTime = row.Item("Horas0")
+        cadenaXML &= "HORA00=""" & hora0.ToString("HH:mm") & """ "
+        Dim hora50 As DateTime = row.Item("Horas50")
+        cadenaXML &= "HORA50=""" & hora50.ToString("HH:mm") & """ "
+        Dim hora100 As DateTime = row.Item("Horas100")
+        cadenaXML &= "HOR100=""" & hora100.ToString("HH:mm") & """ "
+        Dim horaPermiso As DateTime = row.Item("HorasPermiso")
+        cadenaXML &= "HORPER=""" & horaPermiso.ToString("HH:mm") & """ "
+        Dim horaRecuperar As DateTime = row.Item("HorasRecuperar")
+        cadenaXML &= "HORREC=""" & horaRecuperar.ToString("HH:mm") & """ "
+        cadenaXML &= "JUSTIF=""" & row.Item("Justificativo").ToString & """ "
+        cadenaXML &= "ANIOPE=""" & Master.Año & """ "
+        cadenaXML &= "PERIOD=""" & Master.Periodo & """ "
+        cadenaXML &= "HOREXT=""" & row.Item("HorasExtrasId").ToString & """ "
+        cadenaXML &= "ACTIVO=""" & row.Item("Activo") & """ "
+        cadenaXML &= "BIOMET=""" & row.Item("Biometrico") & """ "
         cadenaXML &= "APROBA=""" & row.Item("Aprobado") & """ "
         cadenaXML &= " /> "
 
@@ -341,6 +423,25 @@
             Dim imgRechazar As ImageButton = TryCast(e.Row.Cells(14).Controls(3), ImageButton)
             Dim lblAprobado As Label = TryCast(e.Row.Cells(15).Controls(1), Label)
             If DirectCast(e.Row.Cells(13).Controls(1), System.Web.UI.WebControls.Label).Text = "1" Then 'Aprobado
+                imgAprobar.Visible = False
+                imgRechazar.Visible = True
+                lblAprobado.Visible = True
+                lblAprobado.Text = "Aprobado"
+            Else
+                imgAprobar.Visible = True
+                imgRechazar.Visible = False
+                lblAprobado.Visible = True
+                lblAprobado.Text = "Por Aprobar"
+            End If
+        End If
+    End Sub
+
+    Protected Sub GridViewDetalle_RowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim imgAprobar As ImageButton = TryCast(e.Row.Cells(19).Controls(1), ImageButton)
+            Dim imgRechazar As ImageButton = TryCast(e.Row.Cells(19).Controls(3), ImageButton)
+            Dim lblAprobado As Label = TryCast(e.Row.Cells(20).Controls(1), Label)
+            If DirectCast(e.Row.Cells(21).Controls(1), System.Web.UI.WebControls.Label).Text = "True" Then 'Aprobado
                 imgAprobar.Visible = False
                 imgRechazar.Visible = True
                 lblAprobado.Visible = True

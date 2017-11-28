@@ -88,7 +88,6 @@ Public Class Registro
     End Sub
 
     Private Function GrabarRegistros(ByVal rows As DataRow) As Integer
-        'Dim SQLConexionBD As New SQLConexionBD()
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim HorasExtrasId As Integer
         Dim infoXlm As String = infoXML(rows)
@@ -143,6 +142,7 @@ Public Class Registro
         cadenaXML &= "HOREXT=""" & row.Item("HorasExtrasId").ToString & """ "
         cadenaXML &= "ACTIVO=""" & row.Item("Activo") & """ "
         cadenaXML &= "BIOMET=""" & row.Item("Biometrico") & """ "
+        cadenaXML &= "APROBA=""" & row.Item("Aprobado") & """ "
         cadenaXML &= " /> "
 
         Return cadenaXML

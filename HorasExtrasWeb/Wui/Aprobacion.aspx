@@ -136,7 +136,9 @@
                         <tr id="trmostrar" runat="server" visible="false">
                             <td>
                                 <div>
-                                    <asp:GridView ID="gvBiometrico" runat="server" AutoGenerateColumns="False">
+                                    <asp:GridView ID="gvBiometrico" runat="server" AutoGenerateColumns="False"
+                                        onrowdatabound="GridViewDetalle_RowDataBound" 
+                                        >
                                         <HeaderStyle CssClass="w3-indigo w3-center w3-small" />
                                         <AlternatingRowStyle CssClass="w3-light-grey" />
                                         <Columns>
@@ -240,14 +242,19 @@
                                             <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="Center" >
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="ButtonAprobar" runat="server" CommandName="aprobar" ImageUrl="../icons/aceptar.ico"
-                                                        OnClick="OnConfirm" OnClientClick="Confirm()"/>
+                                                        OnClick="OnConfirmDetalle" OnClientClick="Confirm()"/>
                                                     <asp:ImageButton ID="ButtonRechazar" runat="server" CommandName="rechazar" ImageUrl="../icons/rechazar.ico"
-                                                        OnClick="OnConfirm" OnClientClick="Confirm()" Visible="false"/>
+                                                        OnClick="OnConfirmDetalle" OnClientClick="Confirm()" Visible="false"/>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Estado" >
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblAprobado" runat="server" Text="Aprobado" Visible="false"/>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Aprobado" Visible="False">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="Aprobado" runat="server" Text='<%#Bind("Aprobado") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>
