@@ -88,7 +88,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Fecha">
                         <ItemTemplate>
-                            <asp:Label ID="lblFecha" runat="server" Text='<%# Bind("Fecha", "{0:ddd-dd-MM-yy}") %>' />
+                            <asp:Label ID="lblFecha" runat="server" Text='<%# Bind("Fecha", "{0:ddd-dd-MM-yy}") %>'/>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Hora Ingreso" ItemStyle-HorizontalAlign="Center">
@@ -115,7 +115,7 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Horas a pagar" ItemStyle-HorizontalAlign="Center">
+                    <asp:TemplateField HeaderText="Horas pagar" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:Label ID="Horas50" runat="server" Text='<%#Bind("Horas50", "{0: H:mm}") %>' />
                         </ItemTemplate>
@@ -123,7 +123,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Justificativo extensión jornada">
                         <ItemTemplate>
-                            <asp:Label ID="Justificativo" runat="server" Text='<%# Bind("Justificativo") %>' />
+                            <asp:Label ID="Justificativo" runat="server" Text='<%# Bind("Justificativo") %>' Font-Size="6pt" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Biometrico" Visible="false">
@@ -182,7 +182,7 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Horas a pagar" ItemStyle-HorizontalAlign="Center">
+                    <asp:TemplateField HeaderText="Horas pagar" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:Label ID="Horas100" runat="server" Text='<%#Bind("Horas100", "{0: H:mm}") %>' />
                         </ItemTemplate>
@@ -190,7 +190,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Justificativo extensión jornada">
                         <ItemTemplate>
-                            <asp:Label ID="Justificativo" runat="server" Text='<%# Bind("Justificativo") %>' />
+                            <asp:Label ID="Justificativo" runat="server" Text='<%# Bind("Justificativo") %>' Font-Size="6pt" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Biometrico" Visible="false">
