@@ -263,7 +263,7 @@
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Center"/>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Atrasado" ItemStyle-HorizontalAlign="Center" Visible="False">
+                <asp:TemplateField HeaderText="Atrasado" ItemStyle-HorizontalAlign="Center" >
                     <ItemTemplate>
                         <asp:Label ID="HoraAtr" runat="server" Text='<%#Bind("Atrasado", "{0: H:mm}") %>' />
                     </ItemTemplate>
