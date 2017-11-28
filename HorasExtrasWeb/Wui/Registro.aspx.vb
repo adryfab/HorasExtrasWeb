@@ -601,7 +601,9 @@ Public Class Registro
             'Desaparece botones si esta aprobado
             Dim imgEdit As ImageButton = TryCast(e.Row.Cells(1).Controls(1), ImageButton)
             Dim imgDelete As ImageButton = TryCast(e.Row.Cells(1).Controls(3), ImageButton)
-            If lblAprobado.Visible = True Then 'SI Aprobado
+            Dim lbAprobado As Label = TryCast(e.Row.Cells(20).Controls(1), Label)
+            'If lblAprobado.Visible = True Then 'SI Aprobado
+            If lbAprobado.Text = "True" Then 'SI Aprobado
                 imgEdit.Visible = False
                 imgDelete.Visible = False
                 BtnAdd.Visible = False
