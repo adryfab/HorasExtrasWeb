@@ -133,12 +133,12 @@
                             </Columns>
                         </asp:GridView>
                         <br>
-                        <br>
-                        <br></br>
                         <tr id="trmostrar" runat="server" visible="False">
                             <td runat="server">
                                 <div>
-                                    <asp:GridView ID="gvBiometrico" runat="server" AutoGenerateColumns="False" OnRowDataBound="GridViewDetalle_RowDataBound" OnRowDeleting="GridView_RowDeleting">
+                                    <asp:GridView ID="gvBiometrico" runat="server" AutoGenerateColumns="False" 
+                                        OnRowDataBound="GridViewDetalle_RowDataBound" 
+                                        OnRowDeleting="GridView_RowDeleting">
                                         <AlternatingRowStyle CssClass="w3-light-grey" />
                                         <Columns>
                                             <asp:TemplateField HeaderText="Acción">
@@ -274,9 +274,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <br></br>
-                        </br>
-                        </br>
+                        <br>
                     </div>
                 </ContentTemplate>
             </ajaxToolkit:TabPanel>

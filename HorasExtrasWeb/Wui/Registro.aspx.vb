@@ -99,7 +99,7 @@ Public Class Registro
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim Resultados As Integer
         Dim infoXlm As String = infoXML(rows)
-        Resultados = SQLConexionBD.EliminarRegistro(Context.User.Identity.Name, infoXlm)
+        Resultados = SQLConexionBD.EliminarRegistro(rows.Item("CodigoEmp"), infoXlm)
         Return Resultados
     End Function
 

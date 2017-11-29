@@ -388,13 +388,13 @@
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim Resultados As Integer
         Dim infoXlm As String = infoDetalleXML(rows)
-        Resultados = SQLConexionBD.EliminarRegistro(Context.User.Identity.Name, infoXlm)
+        Resultados = SQLConexionBD.EliminarRegistro(rows.Item("CodigoEmp"), infoXlm)
         Return Resultados
     End Function
 
 #End Region
 
-#Region "Eventos del GridView"
+#Region "Eventos"
 
     Protected Sub GridView_RowCommand(ByVal sender As Object, ByVal e As GridViewCommandEventArgs)
         If e.CommandName = "PlusMas" Then
@@ -482,6 +482,7 @@
         DTable.Rows(e.RowIndex).Delete()
         Session("dtBiometrico") = DTable
         Llenar_Grid_Detalle(codEmp)
+        Llenar_Grid()
     End Sub
 
 #End Region
