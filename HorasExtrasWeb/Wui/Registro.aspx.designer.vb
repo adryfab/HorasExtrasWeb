@@ -59,6 +59,24 @@ Partial Public Class Registro
     Protected WithEvents lblAprobado As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''Control Label10.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Label10 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Control lblTotalAtrasos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblTotalAtrasos As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Control NewReg2.
     '''</summary>
     '''<remarks>

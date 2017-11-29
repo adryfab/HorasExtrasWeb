@@ -83,6 +83,12 @@
                 <td>
                     <asp:Label ID="lblAprobado" runat="server" Text="Aprobado" Visible="false" class="w3-red"/>
                 </td>
+                <td class="w3-tiny w3-border-top w3-border-left w3-border-bottom w3-border-red w3-pale-red">
+                    <asp:Label ID="Label10" runat="server" Text="Total de Atrasos: "/>
+                </td>
+                <td class="w3-tiny w3-border-top w3-border-right w3-border-bottom w3-border-red w3-pale-red">
+                    <asp:Label ID="lblTotalAtrasos" runat="server" Text="0:00"/>
+                </td>
             </tr>
         </table>
     </div>
