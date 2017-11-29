@@ -162,8 +162,6 @@ Public Class Registro
     End Function
 
     Private Function ActualizarTotales() As Integer
-        'Totales()
-        'Dim SQLConexionBD As New SQLConexionBD()
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim Resultados As Integer
         Dim infoXlm As String = infoXMLTotal()
@@ -292,7 +290,147 @@ Public Class Registro
 
 #End Region
 
-#Region "Eventos del GridView"
+#Region "Procesos Adicionales"
+
+    Private Sub MostrarNewRegistro()
+        NewReg2.Visible = True
+        BtnAdd.Enabled = False
+        btnPrint1.Enabled = False
+    End Sub
+
+    Private Sub LimpiarNew()
+        NewReg2.Visible = False
+        FechaTxt.Text = Nothing
+        IngresoTxt.Text = Nothing
+        SalidaTxt.Text = Nothing
+        DetalleTxt.Text = Nothing
+        Permisotxt.Text = Nothing
+        RecuperarTxt.Text = Nothing
+        BtnAdd.Enabled = True
+        btnPrint1.Enabled = True
+        lblError.Text = Nothing
+        lblError.Visible = False
+        divError.Visible = False
+    End Sub
+
+    Private Function Validaciones() As Boolean
+        Dim resultado As Boolean = False
+
+        If IngresoTxt.Text <> "" And SalidaTxt.Text <> "" Then
+            'Valida si lo ingresado es una hora correcta (mm:ss)
+            If IsDate(IngresoTxt.Text) = False Then
+                Return False
+            End If
+            If IsDate(SalidaTxt.Text) = False Then
+                Return False
+            End If
+
+            Dim ingreso As DateTime = FechaTxt.Text + " " + IngresoTxt.Text
+            Dim salida As DateTime = FechaTxt.Text + " " + SalidaTxt.Text
+
+            'La hora de ingreso debe ser mayor que la hora de salida
+            If ingreso > salida Then
+                lblError.Text = "La hora de ingreso debe ser mayor que la hora de salida"
+                lblError.Visible = True
+                divError.Visible = True
+                Return False
+            End If
+
+            resultado = True
+        Else
+            If IngresoTxt.Text = "" And SalidaTxt.Text = "" And (Permisotxt.Text <> "" Or RecuperarTxt.Text <> "") Then
+                resultado = True
+            Else
+                lblError.Text = "Debe ingresar alguna hora"
+                lblError.Visible = True
+                divError.Visible = True
+                resultado = False
+            End If
+        End If
+
+        Return resultado
+    End Function
+
+    Private Function CalculoHoras(ByRef row As DataRow) As Boolean
+        Dim resultado As Boolean = False
+
+        Dim fecha As Date = row("Fecha")
+
+        Dim horaIngreso As DateTime = row("Ingreso")
+        Dim horaSalida As DateTime = row("Salida")
+
+        Dim TiempoDiferencia As TimeSpan = horaSalida.Subtract(horaIngreso)
+        Dim horasDifrencia As Integer = TiempoDiferencia.Hours
+        Dim minutosDiferencia As Integer = TiempoDiferencia.Minutes
+        Dim TotalDiferencia As String = horasDifrencia.ToString + ":" + minutosDiferencia.ToString
+        Dim sobretiempo50 As Integer = horasDifrencia - 9 'OJO: Revisar 9 horas
+        Dim thorOfi As TimeSpan = New TimeSpan(0, 9, 0, 0)
+        Dim thorDiff As TimeSpan = TiempoDiferencia.Subtract(thorOfi)
+
+        row("Laborado") = TotalDiferencia
+
+        Dim diaDeLaSemana As Integer = Weekday(fecha)
+
+        'Verifica si es 50% o 100%
+        If diaDeLaSemana = 1 Or diaDeLaSemana = 7 Then 'Domingo=1 o Sabado=7 --> 100%
+            row("Horas100") = TotalDiferencia
+            resultado = True
+        Else 'Lunes a Viernes
+            'Dim SQLConexionBD As New SQLConexionBD()
+            Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
+            Dim feriado As Boolean = SQLConexionBD.ValidarFeriados(fecha, Master.areaId)
+            If feriado = True Then 'SI es feriado --> 100%
+                row("Horas100") = TotalDiferencia
+                resultado = True
+            Else 'NO es feriado
+                If thorDiff.TotalMinutes > 0 Then 'más de 9 horas de trabajo 50%
+                    row("Horas50") = (sobretiempo50.ToString + ":" + minutosDiferencia.ToString)
+                    resultado = True
+                Else 'ingresa por la noche
+                    Dim fechaIngreso As DateTime = fecha.ToShortDateString + " " + horaIngreso.ToShortTimeString
+                    Dim fechaSalida As DateTime = fecha.ToShortDateString + " " + horaSalida.ToShortTimeString
+                    Dim fechaIniHEN1 As DateTime = fecha.ToShortDateString + " 17:30"
+                    Dim fechaFinHEN1 As DateTime = fecha.ToShortDateString + " 23:59"
+                    Dim fechaIniHEN2 As DateTime = fecha.ToShortDateString + " 00:00"
+                    Dim fechaFinHEN2 As DateTime = fecha.ToShortDateString + " 05:59"
+                    If fechaIngreso >= fechaIniHEN1 And fechaSalida <= fechaFinHEN1 Then 'Entre las 17:30-23:50 = 50%
+                        row("Horas50") = TotalDiferencia
+                        resultado = True
+                    Else
+                        If fechaIngreso >= fechaIniHEN2 And fechaSalida <= fechaFinHEN2 Then 'Entre las 00:00-05:50 = 100%
+                            row("Horas100") = TotalDiferencia
+                            resultado = True
+                        Else
+                            lblError.Text = "Separe las horas del 50% y 100% en dos registros diferentes"
+                            lblError.Visible = True
+                            divError.Visible = True
+                            resultado = False
+                        End If
+                    End If
+                End If
+            End If
+        End If
+
+        row("Activo") = True
+        Return resultado
+    End Function
+
+    Private Function ValidarJustificacionGrid(ByVal row As GridViewRow) As Boolean
+        Dim justificacion As String = (CType(row.FindControl("Justificativo"), TextBox)).Text
+        Dim lblVal As Label = CType(row.FindControl("lblJustVal"), Label)
+        If justificacion = Nothing Or justificacion = "" Then
+            lblVal.Text = "FALTA!"
+            lblVal.Visible = True
+            Return False
+        Else
+            lblVal.Visible = False
+            Return True
+        End If
+    End Function
+
+#End Region
+
+#Region "Eventos"
 
     Protected Sub GridView_RowEditing(ByVal sender As Object, ByVal e As GridViewEditEventArgs)
         'Set the edit index.
@@ -397,46 +535,12 @@ Public Class Registro
         End Try
     End Sub
 
-    Private Function ValidarJustificacionGrid(ByVal row As GridViewRow) As Boolean
-        Dim justificacion As String = (CType(row.FindControl("Justificativo"), TextBox)).Text
-        Dim lblVal As Label = CType(row.FindControl("lblJustVal"), Label)
-        If justificacion = Nothing Or justificacion = "" Then
-            lblVal.Text = "FALTA!"
-            lblVal.Visible = True
-            Return False
-        Else
-            lblVal.Visible = False
-            Return True
-        End If
-    End Function
-
     Protected Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         MostrarNewRegistro()
     End Sub
 
-    Private Sub MostrarNewRegistro()
-        NewReg2.Visible = True
-        BtnAdd.Enabled = False
-        btnPrint1.Enabled = False
-    End Sub
-
     Protected Sub btnDeshacer_Click(sender As Object, e As ImageClickEventArgs) Handles btnDeshacer.Click
         LimpiarNew()
-    End Sub
-
-    Private Sub LimpiarNew()
-        NewReg2.Visible = False
-        FechaTxt.Text = Nothing
-        IngresoTxt.Text = Nothing
-        SalidaTxt.Text = Nothing
-        DetalleTxt.Text = Nothing
-        Permisotxt.Text = Nothing
-        RecuperarTxt.Text = Nothing
-        BtnAdd.Enabled = True
-        btnPrint1.Enabled = True
-        lblError.Text = Nothing
-        lblError.Visible = False
-        divError.Visible = False
     End Sub
 
     Protected Sub btnAgregar_Click(sender As Object, e As ImageClickEventArgs) Handles btnAgregar.Click
@@ -493,108 +597,6 @@ Public Class Registro
         Llenar_Grid()
         ActualizarTotales()
     End Sub
-
-    Private Function Validaciones() As Boolean
-        Dim resultado As Boolean = False
-
-        If IngresoTxt.Text <> "" And SalidaTxt.Text <> "" Then
-            'Valida si lo ingresado es una hora correcta (mm:ss)
-            If IsDate(IngresoTxt.Text) = False Then
-                Return False
-            End If
-            If IsDate(SalidaTxt.Text) = False Then
-                Return False
-            End If
-
-            Dim ingreso As DateTime = FechaTxt.Text + " " + IngresoTxt.Text
-            Dim salida As DateTime = FechaTxt.Text + " " + SalidaTxt.Text
-
-            'La hora de ingreso debe ser mayor que la hora de salida
-            If ingreso > salida Then
-                lblError.Text = "La hora de ingreso debe ser mayor que la hora de salida"
-                lblError.Visible = True
-                divError.Visible = True
-                Return False
-            End If
-
-            resultado = True
-        Else
-            If IngresoTxt.Text = "" And SalidaTxt.Text = "" And (Permisotxt.Text <> "" Or RecuperarTxt.Text <> "") Then
-                resultado = True
-            Else
-                lblError.Text = "Debe ingresar alguna hora"
-                lblError.Visible = True
-                divError.Visible = True
-                resultado = False
-            End If
-        End If
-
-        Return resultado
-    End Function
-
-    Private Function CalculoHoras(ByRef row As DataRow) As Boolean
-        Dim resultado As Boolean = False
-
-        Dim fecha As Date = row("Fecha")
-
-        Dim horaIngreso As DateTime = row("Ingreso")
-        Dim horaSalida As DateTime = row("Salida")
-
-        Dim TiempoDiferencia As TimeSpan = horaSalida.Subtract(horaIngreso)
-        Dim horasDifrencia As Integer = TiempoDiferencia.Hours
-        Dim minutosDiferencia As Integer = TiempoDiferencia.Minutes
-        Dim TotalDiferencia As String = horasDifrencia.ToString + ":" + minutosDiferencia.ToString
-        Dim sobretiempo50 As Integer = horasDifrencia - 9 'OJO: Revisar 9 horas
-        Dim thorOfi As TimeSpan = New TimeSpan(0, 9, 0, 0)
-        Dim thorDiff As TimeSpan = TiempoDiferencia.Subtract(thorOfi)
-
-        row("Laborado") = TotalDiferencia
-
-        Dim diaDeLaSemana As Integer = Weekday(fecha)
-
-        'Verifica si es 50% o 100%
-        If diaDeLaSemana = 1 Or diaDeLaSemana = 7 Then 'Domingo=1 o Sabado=7 --> 100%
-            row("Horas100") = TotalDiferencia
-            resultado = True
-        Else 'Lunes a Viernes
-            'Dim SQLConexionBD As New SQLConexionBD()
-            Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
-            Dim feriado As Boolean = SQLConexionBD.ValidarFeriados(fecha, Master.areaId)
-            If feriado = True Then 'SI es feriado --> 100%
-                row("Horas100") = TotalDiferencia
-                resultado = True
-            Else 'NO es feriado
-                If thorDiff.TotalMinutes > 0 Then 'más de 9 horas de trabajo 50%
-                    row("Horas50") = (sobretiempo50.ToString + ":" + minutosDiferencia.ToString)
-                    resultado = True
-                Else 'ingresa por la noche
-                    Dim fechaIngreso As DateTime = fecha.ToShortDateString + " " + horaIngreso.ToShortTimeString
-                    Dim fechaSalida As DateTime = fecha.ToShortDateString + " " + horaSalida.ToShortTimeString
-                    Dim fechaIniHEN1 As DateTime = fecha.ToShortDateString + " 17:30"
-                    Dim fechaFinHEN1 As DateTime = fecha.ToShortDateString + " 23:59"
-                    Dim fechaIniHEN2 As DateTime = fecha.ToShortDateString + " 00:00"
-                    Dim fechaFinHEN2 As DateTime = fecha.ToShortDateString + " 05:59"
-                    If fechaIngreso >= fechaIniHEN1 And fechaSalida <= fechaFinHEN1 Then 'Entre las 17:30-23:50 = 50%
-                        row("Horas50") = TotalDiferencia
-                        resultado = True
-                    Else
-                        If fechaIngreso >= fechaIniHEN2 And fechaSalida <= fechaFinHEN2 Then 'Entre las 00:00-05:50 = 100%
-                            row("Horas100") = TotalDiferencia
-                            resultado = True
-                        Else
-                            lblError.Text = "Separe las horas del 50% y 100% en dos registros diferentes"
-                            lblError.Visible = True
-                            divError.Visible = True
-                            resultado = False
-                        End If
-                    End If
-                End If
-            End If
-        End If
-
-        row("Activo") = True
-        Return resultado
-    End Function
 
     Protected Sub GridView_RowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
         If e.Row.RowType = DataControlRowType.DataRow Then

@@ -42,6 +42,9 @@
         End If
         dtEmpleados = dsEmpleados.Tables(0)
         DatosEmpleados(dtEmpleados)
+
+        'Totales del grid
+        TotalesFooter()
     End Sub
 
     Private Sub BindDataGrid()
@@ -68,50 +71,6 @@
         Master.procesar = adAuth.MenuProcesar(Master.areaId, Master.DepId, Master.CargoId)
         Master.aprobar = adAuth.MenuAprobar(Master.codigo)
         Master.sesionIni = True
-    End Sub
-
-    Protected Sub GridView_RowEditing(ByVal sender As Object, ByVal e As GridViewEditEventArgs)
-        'Set the edit index.
-        gvAtrasos.EditIndex = e.NewEditIndex
-
-        'Bind data to the GridView control.
-        BindDataGrid()
-    End Sub
-
-    Protected Sub GridView_RowCancelingEdit()
-        'Reset the edit index.
-        gvAtrasos.EditIndex = -1
-        'Bind Data to the GridView control.
-        BindDataGrid()
-        'Llenar_Grid()
-    End Sub
-
-    Protected Sub GridView_RowUpdating(ByVal sender As Object, ByVal e As GridViewUpdateEventArgs)
-        Try
-            Dim dt As DataTable = CType(Session("dtAtrasos"), DataTable)
-            Dim row As GridViewRow = gvAtrasos.Rows(e.RowIndex)
-            Dim drow As DataRow = dt.Rows(row.DataItemIndex)
-
-            If ValidarJustificacionGrid(row) = False Then Exit Sub
-
-            'Actualizando el justificativo
-            drow("Justificativo") = (CType(row.FindControl("Justificativo"), TextBox)).Text
-
-            'Grabando el registro en la BD
-            Dim AtrasosId As Integer = GrabarRegistros(drow)
-            drow("AtrasosId") = AtrasosId
-
-            'Reset the edit index.
-            gvAtrasos.EditIndex = -1
-
-            'Bind data to the GridView control.
-            BindDataGrid()
-            Llenar_Grid()
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-            divError.Visible = True
-        End Try
     End Sub
 
     Private Function ValidarJustificacionGrid(ByVal row As GridViewRow) As Boolean
@@ -165,6 +124,67 @@
         Return cadenaXML
     End Function
 
+    Private Sub TotalesFooter()
+        Dim dtAtrasos As DataTable = Session("dtAtrasos")
+        If dtAtrasos.Rows.Count > 0 Then
+            Dim horAtr, minAtr As Integer
+            For Each row As DataRow In dtAtrasos.Rows
+                horAtr = horAtr + Convert.ToDateTime(row("Tiempo")).Hour
+                minAtr = minAtr + Convert.ToDateTime(row("Tiempo")).Minute
+            Next
+            Dim ThorAtr As Integer = horAtr + Fix(minAtr / 60)
+            Dim TminAtr As Integer = minAtr Mod 60
+            gvAtrasos.FooterRow.Cells(4).Text = "Total"
+            gvAtrasos.FooterRow.Cells(5).Text = String.Format("{0}:{1}", ThorAtr.ToString("0"), TminAtr.ToString("00"))
+        End If
+    End Sub
+
+#Region "Eventos"
+
+    Protected Sub GridView_RowEditing(ByVal sender As Object, ByVal e As GridViewEditEventArgs)
+        'Set the edit index.
+        gvAtrasos.EditIndex = e.NewEditIndex
+
+        'Bind data to the GridView control.
+        BindDataGrid()
+    End Sub
+
+    Protected Sub GridView_RowCancelingEdit()
+        'Reset the edit index.
+        gvAtrasos.EditIndex = -1
+        'Bind Data to the GridView control.
+        BindDataGrid()
+        'Llenar_Grid()
+    End Sub
+
+    Protected Sub GridView_RowUpdating(ByVal sender As Object, ByVal e As GridViewUpdateEventArgs)
+        Try
+            Dim dt As DataTable = CType(Session("dtAtrasos"), DataTable)
+            Dim row As GridViewRow = gvAtrasos.Rows(e.RowIndex)
+            Dim drow As DataRow = dt.Rows(row.DataItemIndex)
+
+            If ValidarJustificacionGrid(row) = False Then Exit Sub
+
+            'Actualizando el justificativo
+            drow("Justificativo") = (CType(row.FindControl("Justificativo"), TextBox)).Text
+
+            'Grabando el registro en la BD
+            Dim AtrasosId As Integer = GrabarRegistros(drow)
+            drow("AtrasosId") = AtrasosId
+
+            'Reset the edit index.
+            gvAtrasos.EditIndex = -1
+
+            'Bind data to the GridView control.
+            BindDataGrid()
+            Llenar_Grid()
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+            divError.Visible = True
+        End Try
+    End Sub
+
     Protected Sub GridView_RowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
         If e.Row.RowType = DataControlRowType.DataRow Then
             'Desaparece botones si esta aprobado
@@ -177,4 +197,7 @@
             End If
         End If
     End Sub
+
+#End Region
+
 End Class

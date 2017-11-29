@@ -217,7 +217,8 @@
             OnRowCancelingEdit="GridView_RowCancelingEdit" 
             OnRowDeleting="GridView_RowDeleting" 
             OnRowUpdating="GridView_RowUpdating" ShowHeaderWhenEmpty="True" 
-            onRowDatabound="GridView_RowDataBound" ShowFooter="True" 
+            onRowDatabound="GridView_RowDataBound" 
+            ShowFooter="True" 
             >
             <HeaderStyle CssClass="w3-indigo w3-center w3-small" />
             <FooterStyle CssClass="w3-gray w3-center w3-small" />
