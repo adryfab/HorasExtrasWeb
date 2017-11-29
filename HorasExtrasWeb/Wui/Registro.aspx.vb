@@ -15,7 +15,6 @@ Public Class Registro
 #Region "Manejo de Datos"
 
     Private Sub Llenar_Grid()
-        'Dim SQLConexionBD As New SQLConexionBD()
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dtBiometrico As New DataTable
         Dim dtEmpleado As New DataTable
@@ -59,6 +58,8 @@ Public Class Registro
         Else
             lblAprobado.Visible = False
         End If
+
+        lblTotalAtrasos.Text = dtEmpleado.Rows(0)("Atrasos")
 
         Master.usuario = Context.User.Identity.Name
         Master.codigo = dtEmpleado.Rows(0)("CodigoEmp")
@@ -250,7 +251,6 @@ Public Class Registro
             minTot050 = min050 - minPer
         Else
             horTot050 = hor050 - horPer - 1
-            'minTot050 = ((min050 - (minPer + 60)) + 60) * (-1)
             minTot050 = (minPer - (min050 + 60)) * (-1)
         End If
         If min100 >= minRec Then
@@ -258,30 +258,69 @@ Public Class Registro
             minTot100 = min100 - minRec
         Else
             horTot100 = hor100 - horRec - 1
-            'minTot100 = ((min100 - (minRec + 60)) + 60) * (-1)
             minTot100 = (minRec - (min100 + 60)) * (-1)
         End If
 
         Dim footer As GridViewRow = gvBiometrico.FooterRow
         Dim row As New GridViewRow(footer.RowIndex + 1, -1, footer.RowType, footer.RowState)
         Dim cel0, cel050, cel100 As New TableCell()
+
         cel0.Text = "Total de Horas a pagar"
         cel0.ColumnSpan = 8
         cel0.HorizontalAlign = HorizontalAlign.Right
+
         Dim ftothor50 As Integer = horTot050 + Fix(minTot050 / 60)
         Dim tothor50 As String = ftothor50.ToString("0")
         Dim ftotmin50 As Integer = minTot050 Mod 60
         Dim totmin50 As String = ftotmin50.ToString("00")
-        Session("TotHor050") = tothor50
-        Session("TotMin050") = totmin50
-        cel050.Text = String.Format("{0}:{1}", tothor50, totmin50)
         Dim ftothor100 As Integer = horTot100 + Fix(minTot100 / 60)
         Dim tothor100 As String = ftothor100.ToString("0")
         Dim ftotmin100 As Integer = minTot100 Mod 60
         Dim totmin100 As String = ftotmin100.ToString("00")
+
+        'Calculo de Atrasos
+        'Unificando horas y minutos 50% 
+        Dim strTotHoras50 As String = tothor50 + ":" + totmin50
+        'Convirtiendo en formato time
+        Dim timeTotal50 As DateTime = Convert.ToDateTime(strTotHoras50)
+        'Obteniendo el atraso
+        Dim atraso As DateTime = Convert.ToDateTime(lblTotalAtrasos.Text)
+        'Restando el 50% del atraso        
+        Dim Resta50 As TimeSpan = timeTotal50.Subtract(atraso)
+        'Se verifica si el atraso es superior al 50%
+        If Resta50.Ticks < 0 Then 'Aun falta descontar atrasos
+            tothor50 = "0"
+            totmin50 = "0"
+            Dim newAtraso As String = Math.Abs(Resta50.Hours).ToString("0") + ":" + Math.Abs(Resta50.Minutes).ToString("00")
+            atraso = Convert.ToDateTime(newAtraso)
+            'Unificando horas y minutos 100%
+            Dim strTotHoras100 As String = tothor100 + ":" + totmin100
+            'Se obtiene el 100% para descontar el atraso faltante
+            Dim timeTotal100 As DateTime = Convert.ToDateTime(strTotHoras100)
+            Dim Resta100 As TimeSpan = timeTotal100.Subtract(atraso)
+            'Se verifica si aun falta descontar
+            If Resta100.Ticks < 0 Then
+                tothor100 = "0"
+                totmin100 = "0"
+                'El negativo faltante se incluye en el 50%
+                tothor50 = "-" + Math.Abs(Resta100.Hours).ToString("0")
+                totmin50 = Math.Abs(Resta100.Minutes).ToString("00")
+            Else 'Se descontó todo el atraso y aún hay 100% a pagar
+                tothor100 = Resta100.Hours
+                totmin100 = Resta100.Minutes
+            End If
+        Else 'Se descontó todo el atraso y aún hay 50% a pagar
+            tothor50 = Resta50.Hours
+            totmin50 = Resta50.Minutes
+        End If
+
+        Session("TotHor050") = tothor50
+        Session("TotMin050") = totmin50
+        cel050.Text = String.Format("{0}:{1}", tothor50, totmin50)
         Session("TotHor100") = tothor100
         Session("TotMin100") = totmin100
         cel100.Text = String.Format("{0}:{1}", tothor100, totmin100)
+
         row.Cells.Add(cel0)
         row.Cells.Add(cel050)
         row.Cells.Add(cel100)
@@ -604,7 +643,6 @@ Public Class Registro
             Dim imgEdit As ImageButton = TryCast(e.Row.Cells(1).Controls(1), ImageButton)
             Dim imgDelete As ImageButton = TryCast(e.Row.Cells(1).Controls(3), ImageButton)
             Dim lbAprobado As Label = TryCast(e.Row.Cells(20).Controls(1), Label)
-            'If lblAprobado.Visible = True Then 'SI Aprobado
             If lbAprobado.Text = "True" Then 'SI Aprobado
                 imgEdit.Visible = False
                 imgDelete.Visible = False
