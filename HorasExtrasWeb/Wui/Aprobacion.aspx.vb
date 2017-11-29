@@ -17,7 +17,6 @@
         Dim dsTablas As New DataSet
         Dim dtAprobaciones As New DataTable
         Dim dsEmpleados As New DataSet
-        Dim dtAtrasos As New DataTable
 
         Dim user As String
         If (Request.Cookies("Usuario") IsNot Nothing) Then
@@ -45,17 +44,6 @@
         End If
         dtAprobaciones = dsTablas.Tables(0)
         Session("dtAprobaciones") = dtAprobaciones
-
-        dsTablas = Nothing
-
-        'Aprobaciones de Atrasos
-        dsTablas = SQLConexionBD.RecuperarAtrasos(user)
-        If dsTablas Is Nothing Then
-            Exit Sub
-        End If
-        dtAtrasos = dsTablas.Tables(0)
-        Session("dtAtrasos") = dtAtrasos
-
         BindDataGrid()
     End Sub
 
@@ -82,8 +70,8 @@
     Private Sub BindDataGrid()
         gvAprobar.DataSource = Session("dtAprobaciones")
         gvAprobar.DataBind()
-        gvAtrasos.DataSource = Session("dtAtrasos")
-        gvAtrasos.DataBind()
+        gvAprobarAtrasos.DataSource = Session("dtAprobaciones")
+        gvAprobarAtrasos.DataBind()
     End Sub
 
     Protected Sub OnConfirm(ByVal sender As Object, ByVal e As EventArgs)
@@ -342,20 +330,39 @@
         BindDataGridDetalle()
     End Sub
 
+    Private Sub Llenar_Grid_Atrasos(ByVal user As String)
+        Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
+        Dim dsTablas As New DataSet
+        Dim dtAtrasos As New DataTable
+
+        dsTablas = SQLConexionBD.RecuperarAtrasos(user)
+        If dsTablas Is Nothing Then
+            Exit Sub
+        End If
+        dtAtrasos = dsTablas.Tables(0)
+        Session("dtAtrasos") = dtAtrasos
+        BindDataGridAtrasos()
+    End Sub
+
     Private Sub BindDataGridDetalle()
         gvBiometrico.DataSource = Session("dtBiometrico")
         gvBiometrico.DataBind()
     End Sub
 
-    Private Sub CambiarPlusMinus(ByVal index As Integer)
+    Private Sub BindDataGridAtrasos()
+        gvAtrasos.DataSource = Session("dtAtrasos")
+        gvAtrasos.DataBind()
+    End Sub
+
+    Private Sub CambiarPlusMinus(ByVal index As Integer, ByVal gv As GridView, ByVal tr As HtmlTableRow)
         id01.Visible = False
         id01.Style.Item("display") = "none"
 
-        Dim imgButon As ImageButton = gvAprobar.Rows(index).FindControl("ButtonMas")
-        Dim id As Label = gvAprobar.Rows(index).FindControl("NOMINA_ID")
+        Dim imgButon As ImageButton = gv.Rows(index).FindControl("ButtonMas")
+        Dim id As Label = gv.Rows(index).FindControl("NOMINA_ID")
 
         'Cambiando todos los iconos a plus
-        For Each row As GridViewRow In gvAprobar.Rows
+        For Each row As GridViewRow In gv.Rows
             Dim img As ImageButton = row.FindControl("ButtonMas")
             Dim lab As Label = row.FindControl("NOMINA_ID")
             If id.Text = lab.Text Then Continue For 'Siguiente registro
@@ -364,10 +371,10 @@
 
         If imgButon.ImageUrl = "../icons/plus.gif" Then
             imgButon.ImageUrl = "../icons/minus.gif"
-            trmostrar.Visible = True
+            tr.Visible = True
         Else
             imgButon.ImageUrl = "../icons/plus.gif"
-            trmostrar.Visible = False
+            tr.Visible = False
         End If
     End Sub
 
@@ -403,7 +410,18 @@
             Dim gvRow As GridViewRow = gvAprobar.Rows(rowIndex)
             Dim NOMINA_ID As Label = CType(gvRow.FindControl("NOMINA_ID"), Label)
             Llenar_Grid_Detalle(NOMINA_ID.Text)
-            CambiarPlusMinus(rowIndex)
+            CambiarPlusMinus(rowIndex, gvAprobar, trmostrar)
+        End If
+    End Sub
+
+    Protected Sub GridViewAprAtr_RowCommand(ByVal sender As Object, ByVal e As GridViewCommandEventArgs)
+        If e.CommandName = "PlusMas" Then
+            Dim rowIndex As Integer
+            rowIndex = Integer.Parse(e.CommandArgument.ToString)
+            Dim gvRow As GridViewRow = gvAprobar.Rows(rowIndex)
+            Dim NOMINA_ID As Label = CType(gvRow.FindControl("NOMINA_ID"), Label)
+            Llenar_Grid_Atrasos(NOMINA_ID.Text)
+            CambiarPlusMinus(rowIndex, gvAprobarAtrasos, trMostrarAtrasos)
         End If
     End Sub
 
@@ -463,6 +481,12 @@
                 lblAprobado.Visible = True
                 lblAprobado.Text = "Por Aprobar"
             End If
+        End If
+    End Sub
+
+    Protected Sub GridViewAprAtr_RowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            'No se programa nada porque la aprobación ya no está en la cabecera sino en el detalle
         End If
     End Sub
 

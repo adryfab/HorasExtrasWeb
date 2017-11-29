@@ -32,13 +32,13 @@ Partial Public Class Aprobacion
     Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
     
     '''<summary>
-    '''Control TabContainer1.
+    '''Control tabHorasExtras.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents TabContainer1 As Global.AjaxControlToolkit.TabContainer
+    Protected WithEvents tabHorasExtras As Global.AjaxControlToolkit.TabContainer
     
     '''<summary>
     '''Control TabPanel1.
@@ -77,13 +77,31 @@ Partial Public Class Aprobacion
     Protected WithEvents gvBiometrico As Global.System.Web.UI.WebControls.GridView
     
     '''<summary>
-    '''Control TabPanel2.
+    '''Control tabAtrasos.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents TabPanel2 As Global.AjaxControlToolkit.TabPanel
+    Protected WithEvents tabAtrasos As Global.AjaxControlToolkit.TabPanel
+    
+    '''<summary>
+    '''Control gvAprobarAtrasos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvAprobarAtrasos As Global.System.Web.UI.WebControls.GridView
+    
+    '''<summary>
+    '''Control trMostrarAtrasos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents trMostrarAtrasos As Global.System.Web.UI.HtmlControls.HtmlTableRow
     
     '''<summary>
     '''Control gvAtrasos.
