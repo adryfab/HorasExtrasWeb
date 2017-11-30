@@ -57,7 +57,6 @@
                 </tr>
             </table>
         </div>
-        <br />
         <div class="w3-border">
             <asp:Label ID="Label8" runat="server" Font-Size="6pt">
             Solicito se sirva autorizar el pago de las horas suplementarias/extraordinarias del período indicado, de acuerdo al 
@@ -67,6 +66,12 @@
             de las jornadas extendidas, siempre que corresponda. 
             </asp:Label>
         </div>
+        <strong>
+            <asp:Label ID="Label7" runat="server" Text="Total de Atrasos: " CssClass="w3-tiny"/>
+            <asp:Label ID="lblAtrasos" runat="server" Text="0:00" CssClass="w3-tiny"/>
+        </strong>
+        <asp:Label ID="Label9" runat="server" CssClass="w3-tiny"
+            Text="   - NOTA: Los Atrasos se descuentan de las Horas Suplementarias y Extraordinarias"/>
         <br />
         <div class="w3-border w3-tiny">
             <asp:Label ID="lblSuplementario" runat="server">
@@ -131,10 +136,21 @@
                             <asp:Label ID="Biometrico" runat="server" Text='<%# Bind("Biometrico") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Aprobado" Visible="false">
+                        <ItemTemplate>
+                            <asp:Label ID="Aprobado" runat="server" Text='<%# Bind("Aprobado") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Ap*">
+                        <ItemTemplate>
+                            <asp:Label ID="lblAprobado" runat="server" Text='NO' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <RowStyle CssClass="w3-tiny" />
             </asp:GridView>            
         </div>
+        <asp:Label ID="Label10" runat="server" Text="*Aprobado" CssClass="w3-tiny"/>
         <br />
         <div class="w3-border w3-tiny">
             <asp:Label ID="lblExtra" runat="server">
@@ -196,6 +212,16 @@
                     <asp:TemplateField HeaderText="Biometrico" Visible="false">
                         <ItemTemplate>
                             <asp:Label ID="Biometrico" runat="server" Text='<%# Bind("Biometrico") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Aprobado" Visible="false">
+                        <ItemTemplate>
+                            <asp:Label ID="Aprobado" runat="server" Text='<%# Bind("Aprobado") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Ap*">
+                        <ItemTemplate>
+                            <asp:Label ID="lblAprobado" runat="server" Text='NO' />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

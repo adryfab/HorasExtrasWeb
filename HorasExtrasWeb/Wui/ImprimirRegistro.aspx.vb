@@ -15,7 +15,6 @@
     End Sub
 
     Private Sub LlenarGrid()
-        'Dim SQLConexionBD As New SQLConexionBD()
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dsTablas As New DataSet
         Dim dtFechas As New DataTable
@@ -23,6 +22,7 @@
         Dim dtSuple50 As New DataTable
         Dim dtExtra100 As New DataTable
         Dim dtJefes As New DataTable
+        Dim dtAprobacion As New DataTable
 
         Dim user As String
         If (Request.Cookies("Usuario") IsNot Nothing) Then
@@ -41,15 +41,16 @@
         dtSuple50 = dsTablas.Tables(2)
         dtExtra100 = dsTablas.Tables(3)
         dtJefes = dsTablas.Tables(4)
+        dtAprobacion = dsTablas.Tables(5)
 
         Session("dtFechas") = dtFechas
         Session("dtEmpleado") = dtEmpleado
         Session("dtSuple50") = dtSuple50
         Session("dtExtra100") = dtExtra100
         Session("dtJefes") = dtJefes
+        Session("dtAprobacion") = dtAprobacion
 
         BindDataGrid()
-        'CambiarEstilo()
         Cabecera()
         Totales()
     End Sub
@@ -85,6 +86,9 @@
         lblSolicitante.Text = dtJefes.Rows(0).Item("COLABORADOR").ToString
         lblSupervisor.Text = dtJefes.Rows(0).Item("SUPERVISOR").ToString
         lblJefe.Text = dtJefes.Rows(0).Item("JEFE").ToString
+
+        Dim dtAprobacion As DataTable = Session("dtAprobacion")
+        lblAtrasos.Text = dtAprobacion.Rows(0).Item("Atrasos").ToString
     End Sub
 
     Private Sub Totales()
@@ -205,14 +209,26 @@
 
     Protected Sub GridView_RowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
         If e.Row.RowType = DataControlRowType.DataRow Then
+            'Cambia de fuente en la fila si no es del biometrico (ingreso manual)
             Dim desc As String = DataBinder.Eval(e.Row.DataItem, "Biometrico").ToString()
             If desc = "0" Then
-                e.Row.Font.Italic = True
-                'e.Row.BorderStyle = BorderStyle.Ridge
+                e.Row.Font.Italic = False
                 e.Row.Font.Name = "Impact"
+                'Si es el Justificativo, no se cambia la fuente
+                Dim lblJus As Label = TryCast(e.Row.Cells(7).Controls(1), Label)
+                lblJus.Font.Name = "Courier New"
             Else
                 e.Row.Font.Italic = False
                 e.Row.Font.Name = "Courier New"
+            End If
+
+            'Actualiza la aprobacion (SI/NO)
+            Dim apr As String = DataBinder.Eval(e.Row.DataItem, "Aprobado").ToString()
+            Dim lblApr As Label = TryCast(e.Row.Cells(10).Controls(1), Label)
+            If apr = "True" Then
+                lblApr.Text = "SI"
+            Else
+                lblApr.Text = "NO"
             End If
         End If
     End Sub
