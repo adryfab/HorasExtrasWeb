@@ -535,26 +535,9 @@ Public Class Registro
             Dim row As GridViewRow = gvBiometrico.Rows(e.RowIndex)
             Dim drow As DataRow = dt.Rows(row.DataItemIndex)
 
+            'Justificacion
             If ValidarJustificacionGrid(row) = False Then Exit Sub
-
-            Dim horaIngreso As DateTime = Convert.ToDateTime((CType(row.FindControl("HoraIng"), Label)).Text)
-            drow("Ingreso") = horaIngreso.ToShortTimeString
-            Dim horaSalida As DateTime = Convert.ToDateTime((CType(row.FindControl("HoraSal"), Label)).Text)
-            drow("Salida") = horaSalida.ToShortTimeString
-
-            Dim Dia As String = (CType(row.FindControl("Dia"), Label)).Text
-
             drow("Justificativo") = (CType(row.FindControl("Justificativo"), TextBox)).Text
-
-            Dim fecha As Date = dt.Rows(row.DataItemIndex)("Fecha")
-
-            'La fecha no está en el rango
-            If fecha < Master.Inicio Or fecha > Master.Fin Then
-                Response.Write("La fecha no está dentro del rango")
-                Exit Sub
-            End If
-
-            CalculoHoras(drow)
 
             'Grabando el registro en la BD
             Dim HorasExtrasId As Integer = GrabarRegistros(drow)
