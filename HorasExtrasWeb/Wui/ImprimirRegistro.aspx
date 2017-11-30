@@ -9,50 +9,56 @@
     <form id="form1" runat="server">
         <div class="w3-center w3-border w3-small">
             <b>
-                <asp:Label ID="Label1" runat="server" Text="FORMULARIO PARA PAGO DE HORAS EXTRAORDINARIAS Y SUPLEMENTARIAS" /></b>
+                <asp:Label ID="Label1" runat="server" Text="FORMULARIO PARA PAGO DE HORAS EXTRAORDINARIAS Y SUPLEMENTARIAS" 
+                    CssClass="w3-tiny" />
+            </b>
         </div>
-        <br />
         <div>
             <table class="w3-border w3-tiny" style="width: 100%;">
                 <tr>
                     <td>
                         <b>
-                            <asp:Label ID="Label2" runat="server" Text="PERÍODO:" /></b>
+                            <asp:Label ID="Label2" runat="server" Text="PERÍODO:" CssClass="w3-tiny" />
+                        </b>
                     </td>
                     <td>
-                        <asp:Label ID="lblPeriodo" runat="server" Text="lblPeriodo" />
+                        <asp:Label ID="lblPeriodo" runat="server" Text="lblPeriodo" CssClass="w3-tiny"/>
                     </td>
                     <td>
                         <b>
-                            <asp:Label ID="Label3" runat="server" Text="COLABORADOR:" /></b>
+                            <asp:Label ID="Label3" runat="server" Text="COLABORADOR:" CssClass="w3-tiny"/>
+                        </b>
                     </td>
                     <td>
-                        <asp:Label ID="lblColaborador" runat="server" Text="lblColaborador" />
+                        <asp:Label ID="lblColaborador" runat="server" Text="lblColaborador" CssClass="w3-tiny"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <b>
-                            <asp:Label ID="Label4" runat="server" Text="CARGO:" /></b>
+                            <asp:Label ID="Label4" runat="server" Text="CARGO:" CssClass="w3-tiny"/>
+                        </b>
                     </td>
                     <td>
-                        <asp:Label ID="lblCargo" runat="server" Text="lblCargo" />
+                        <asp:Label ID="lblCargo" runat="server" Text="lblCargo" CssClass="w3-tiny"/>
                     </td>
                     <td>
                         <b>
-                            <asp:Label ID="Label5" runat="server" Text="LOCALIDAD:" /></b>
+                            <asp:Label ID="Label5" runat="server" Text="LOCALIDAD:" CssClass="w3-tiny"/>
+                        </b>
                     </td>
                     <td>
-                        <asp:Label ID="lblLocalidad" runat="server" Text="lblLocalidad" />
+                        <asp:Label ID="lblLocalidad" runat="server" Text="lblLocalidad" CssClass="w3-tiny"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <b>
-                            <asp:Label ID="Label6" runat="server" Text="DPTO./UNIDAD/P de V:" /></b>
+                            <asp:Label ID="Label6" runat="server" Text="DPTO./UNIDAD/P de V:" CssClass="w3-tiny"/>
+                        </b>
                     </td>
                     <td>
-                        <asp:Label ID="lblDepartamento" runat="server" Text="lblDepartamento" />
+                        <asp:Label ID="lblDepartamento" runat="server" Text="lblDepartamento" CssClass="w3-tiny"/>
                     </td>
                 </tr>
             </table>
@@ -150,8 +156,11 @@
                 <RowStyle CssClass="w3-tiny" />
             </asp:GridView>            
         </div>
-        <asp:Label ID="Label10" runat="server" Text="*Aprobado" CssClass="w3-tiny"/>
-        <br />
+        <div class="w3-right-align">
+            <strong>
+                <asp:Label ID="Label10" runat="server" Text="*Aprobado" CssClass="w3-tiny"/>
+            </strong>
+        </div>
         <div class="w3-border w3-tiny">
             <asp:Label ID="lblExtra" runat="server">
                 DIAS AUTORIZADOS PARA LABORAR HORAS EXTRAORDINARIAS (días feriados, y fines de semana, máximo  24 horas) CÓDIGO DEL TRABAJO
@@ -230,7 +239,6 @@
         </div>
         <br />
         <br />
-        <br />
         <div>
             <table style="width: 100%;" class="w3-center w3-tiny">
                 <tr>
@@ -260,8 +268,7 @@
                 </tr>
             </table>
         </div>
-        <br />
-        <div class="w3-center w3-gray">
+        <div class="w3-center w3-gray w3-border">
             <b>
                 <asp:Label ID="Label16" runat="server" Text="Nota:" Font-Size="8pt" />
             </b>
@@ -271,11 +278,10 @@
             hasta la fecha del mes que corresponda; caso contrario no procederá el pago respectivo.
             </asp:Label>
         </div>
-        <br />
         <div class="w3-border">
             <div class="w3-center">
                 <b>
-                    <asp:Label ID="Label17" runat="server" Text="ESPACIO RESERVADO PARA EL DPTO. DE DESARROLLO HUMANO" Font-Size="Smaller" />
+                    <asp:Label ID="Label17" runat="server" Text="ESPACIO RESERVADO PARA EL DPTO. DE DESARROLLO HUMANO" CssClass="w3-tiny" />
                 </b>
             </div>
             <asp:Label ID="Label18" runat="server" Text="Observaciones:" CssClass="w3-tiny"/>
