@@ -526,7 +526,7 @@ Public Class Registro
         Session("dtBiometrico") = DTable
         BindDataGrid()
         Llenar_Grid()
-        ActualizarTotales()
+        'ActualizarTotales()
     End Sub
 
     Protected Sub GridView_RowUpdating(ByVal sender As Object, ByVal e As GridViewUpdateEventArgs)
@@ -541,7 +541,6 @@ Public Class Registro
 
             'Grabando el registro en la BD
             Dim HorasExtrasId As Integer = GrabarRegistros(drow)
-            drow("HorasExtrasId") = HorasExtrasId
 
             'Reset the edit index.
             gvBiometrico.EditIndex = -1
@@ -549,7 +548,6 @@ Public Class Registro
             'Bind data to the GridView control.
             BindDataGrid()
             Llenar_Grid()
-            ActualizarTotales()
         Catch ex As Exception
             lblError.Text = ex.Message
             lblError.Visible = True
@@ -617,7 +615,7 @@ Public Class Registro
 
         LimpiarNew()
         Llenar_Grid()
-        ActualizarTotales()
+        'ActualizarTotales()
     End Sub
 
     Protected Sub GridView_RowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
