@@ -107,13 +107,17 @@
                 min050 = min050 + Convert.ToDateTime(row("Horas50")).Minute
             Next
 
-            gvBiometrico50.FooterRow.Cells(4).Text = "Total Permiso"
+            gvBiometrico50.FooterRow.Cells(2).ColumnSpan = 3
+            gvBiometrico50.FooterRow.Cells(2).HorizontalAlign = HorizontalAlign.Right
+            gvBiometrico50.FooterRow.Cells(2).Text = "Total Permiso"
             Dim fhorper As Integer = horPer + Fix(minPer / 60)
             Dim fminper As Integer = minPer Mod 60
-            gvBiometrico50.FooterRow.Cells(5).Text = String.Format("{0}:{1}", fhorper.ToString("0"), fminper.ToString("00"))
+            gvBiometrico50.FooterRow.Cells(3).Text = String.Format("{0}:{1}", fhorper.ToString("0"), fminper.ToString("00"))
             Dim fHor050 As Integer = hor050 + Fix(min050 / 60)
             Dim fMin050 As Integer = min050 Mod 60
-            gvBiometrico50.FooterRow.Cells(6).Text = String.Format("{0}:{1}", fHor050.ToString("0"), fMin050.ToString("00"))
+            gvBiometrico50.FooterRow.Cells(4).Text = String.Format("{0}:{1}", fHor050.ToString("0"), fMin050.ToString("00"))
+            gvBiometrico50.FooterRow.Cells(5).Visible = False
+            gvBiometrico50.FooterRow.Cells(6).Visible = False
 
             SumTotal050(min050, minPer, hor050, horPer)
 
@@ -137,13 +141,17 @@
                 min100 = min100 + Convert.ToDateTime(row("Horas100")).Minute
             Next
 
-            gvBiometrico100.FooterRow.Cells(4).Text = "Total Recuperar"
+            gvBiometrico100.FooterRow.Cells(2).ColumnSpan = 3
+            gvBiometrico100.FooterRow.Cells(2).HorizontalAlign = HorizontalAlign.Right
+            gvBiometrico100.FooterRow.Cells(2).Text = "Total Recuperar"
             Dim fHorRec As Integer = horRec + Fix(minRec / 60)
             Dim fMinRec As Integer = minRec Mod 60
-            gvBiometrico100.FooterRow.Cells(5).Text = String.Format("{0}:{1}", fHorRec.ToString("0"), fMinRec.ToString("00"))
+            gvBiometrico100.FooterRow.Cells(3).Text = String.Format("{0}:{1}", fHorRec.ToString("0"), fMinRec.ToString("00"))
             Dim fHor100 As Integer = hor100 + Fix(min100 / 60)
             Dim fMin100 As Integer = min100 Mod 60
-            gvBiometrico100.FooterRow.Cells(6).Text = String.Format("{0}:{1}", fHor100.ToString("0"), fMin100.ToString("00"))
+            gvBiometrico100.FooterRow.Cells(4).Text = String.Format("{0}:{1}", fHor100.ToString("0"), fMin100.ToString("00"))
+            gvBiometrico100.FooterRow.Cells(5).Visible = False
+            gvBiometrico100.FooterRow.Cells(6).Visible = False
 
             SumTotal100(min100, minRec, hor100, horRec)
 

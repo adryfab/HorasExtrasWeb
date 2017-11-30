@@ -141,7 +141,7 @@
                             <asp:Label ID="Aprobado" runat="server" Text='<%# Bind("Aprobado") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Ap*">
+                    <asp:TemplateField HeaderText="A*">
                         <ItemTemplate>
                             <asp:Label ID="lblAprobado" runat="server" Text='NO' />
                         </ItemTemplate>
@@ -219,7 +219,7 @@
                             <asp:Label ID="Aprobado" runat="server" Text='<%# Bind("Aprobado") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Ap*">
+                    <asp:TemplateField HeaderText="A*">
                         <ItemTemplate>
                             <asp:Label ID="lblAprobado" runat="server" Text='NO' />
                         </ItemTemplate>
