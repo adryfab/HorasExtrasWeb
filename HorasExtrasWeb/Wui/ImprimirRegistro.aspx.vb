@@ -181,22 +181,10 @@
             minTot050 = (minPer - (min050 + 60)) * (-1)
         End If
 
-        Dim row As New GridViewRow(0, 0, DataControlRowType.Footer, DataControlRowState.Normal)
-        Dim cel0, cel050 As New TableCell()
-
-        cel0.Text = "Total de Horas al 50% al mes a pagar"
-        cel0.ColumnSpan = 6
-        cel0.HorizontalAlign = HorizontalAlign.Right
-        row.Cells.Add(cel0)
-
         Dim ftothor50 As Integer = horTot050 + Fix(minTot050 / 60)
         Dim ftotmin50 As Integer = minTot050 Mod 60
         Dim tothor50 As String = ftothor50.ToString("0")
         Dim totmin50 As String = ftotmin50.ToString("00")
-        cel050.Text = String.Format("{0}:{1}", tothor50, totmin50)
-        row.Cells.Add(cel050) 'Total
-
-        gvBiometrico50.Controls(0).Controls.Add(row)
 
         Session("TotHor050") = tothor50
         Session("TotMin050") = totmin50
@@ -213,22 +201,10 @@
             minTot100 = (minRec - (min100 + 60)) * (-1)
         End If
 
-        Dim row As New GridViewRow(0, 0, DataControlRowType.Footer, DataControlRowState.Normal)
-        Dim cel0, cel100 As New TableCell()
-
-        cel0.Text = "Total de Horas al 100% al mes a pagar"
-        cel0.ColumnSpan = 6
-        cel0.HorizontalAlign = HorizontalAlign.Right
-        row.Cells.Add(cel0)
-
         Dim ftothor100 As Integer = horTot100 + Fix(minTot100 / 60)
         Dim ftotmin100 As Integer = minTot100 Mod 60
         Dim tothor100 As String = ftothor100.ToString("0")
         Dim totmin100 As String = ftotmin100.ToString("00")
-        cel100.Text = String.Format("{0}:{1}", tothor100, totmin100)
-        row.Cells.Add(cel100) 'Total
-
-        gvBiometrico100.Controls(0).Controls.Add(row)
 
         Session("TotHor100") = tothor100
         Session("TotMin100") = totmin100
@@ -238,6 +214,10 @@
         'Obteniendo totales 50%
         Dim tothor50 As String = Session("TotHor050")
         Dim totmin50 As String = Session("TotMin050")
+
+        'Obteniendo totales 100%
+        Dim tothor100 As String = Session("TotHor100")
+        Dim totmin100 As String = Session("TotMin100")
 
         'Unificando horas y minutos 50% 
         Dim strTotHoras50 As String = tothor50 + ":" + totmin50
@@ -260,10 +240,6 @@
             Dim newAtraso As String = Math.Abs(Resta50.Hours).ToString("0") + ":" + Math.Abs(Resta50.Minutes).ToString("00")
             atraso = Convert.ToDateTime(newAtraso)
 
-            'Obteniendo totales 100%
-            Dim tothor100 As String = Session("TotHor100")
-            Dim totmin100 As String = Session("TotMin100")
-
             'Unificando horas y minutos 100%
             Dim strTotHoras100 As String = tothor100 + ":" + totmin100
 
@@ -277,6 +253,7 @@
             If Resta100.Ticks < 0 Then 'Aun falta descontar atrasos
                 tothor100 = "0"
                 totmin100 = "0"
+
                 'El negativo sobrante se incluye en el 50%
                 tothor50 = "-" + Math.Abs(Resta100.Hours).ToString("0")
                 totmin50 = Math.Abs(Resta100.Minutes).ToString("00")
@@ -294,14 +271,36 @@
         Dim dtSuple50 As DataTable = Session("dtSuple50")
         '¿Existen registros del 50%?
         If dtSuple50.Rows.Count > 0 Then
-            gvBiometrico50.FooterRow.Cells(4).Text = "AAA"
+            Dim row As New GridViewRow(0, 0, DataControlRowType.Footer, DataControlRowState.Normal)
+            Dim cel0, cel050 As New TableCell()
+
+            cel0.Text = "Total de Horas al 50% al mes a pagar"
+            cel0.ColumnSpan = 6
+            cel0.HorizontalAlign = HorizontalAlign.Right
+            row.Cells.Add(cel0)
+
+            cel050.Text = String.Format("{0}:{1}", tothor50, totmin50)
+            row.Cells.Add(cel050) 'Total
+
+            gvBiometrico50.Controls(0).Controls.Add(row)
         End If
 
         'Se obtiene el 100%
         Dim dtExtra100 As DataTable = Session("dtExtra100")
         '¿Existen registros del 100%?
         If dtExtra100.Rows.Count > 0 Then
+            Dim row As New GridViewRow(0, 0, DataControlRowType.Footer, DataControlRowState.Normal)
+            Dim cel0, cel100 As New TableCell()
 
+            cel0.Text = "Total de Horas al 100% al mes a pagar"
+            cel0.ColumnSpan = 6
+            cel0.HorizontalAlign = HorizontalAlign.Right
+            row.Cells.Add(cel0)
+
+            cel100.Text = String.Format("{0}:{1}", tothor100, totmin100)
+            row.Cells.Add(cel100) 'Total
+
+            gvBiometrico100.Controls(0).Controls.Add(row)
         End If
 
     End Sub
