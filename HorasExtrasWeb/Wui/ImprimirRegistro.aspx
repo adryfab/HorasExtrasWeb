@@ -270,10 +270,10 @@
         </div>
         <div class="w3-center w3-gray w3-border">
             <b>
-                <asp:Label ID="Label16" runat="server" Text="Nota:" Font-Size="8pt" />
+                <asp:Label ID="Label16" runat="server" Text="Nota:" Font-Size="6pt" />
             </b>
             <br />
-            <asp:Label ID="Label15" runat="server" Font-Size="7pt">
+            <asp:Label ID="Label15" runat="server" Font-Size="6pt">
             Entregar con la firma de aprobación de la Gerencia/Jefatura respectiva en Desarrollo Humano para procesamiento, 
             hasta la fecha del mes que corresponda; caso contrario no procederá el pago respectivo.
             </asp:Label>
