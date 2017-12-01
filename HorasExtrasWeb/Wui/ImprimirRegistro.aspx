@@ -91,6 +91,7 @@
                 >
                 <HeaderStyle CssClass="w3-gray w3-tiny"/>
                 <FooterStyle CssClass="w3-center w3-tiny" Font-Bold="true" />
+                <RowStyle CssClass="w3-tiny" />
                 <Columns>
                     <asp:TemplateField HeaderText="N°">
                         <ItemTemplate>
@@ -153,7 +154,6 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-                <RowStyle CssClass="w3-tiny" />
             </asp:GridView>            
         </div>
         <div class="w3-right-align">

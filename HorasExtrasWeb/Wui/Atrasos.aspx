@@ -6,12 +6,32 @@
     <div class="w3-container w3-center w3-panel w3-blue">
         <h2 class="w3-opacity" style="text-shadow:2px 2px 0 #444">Registro de Atrasos</h2>
     </div>
+    <style type="text/css">
+    .submit {
+        text-align:right;
+        background:url(../icons/impresora.ico) no-repeat left;
+        background-color:Turquoise;
+        font-size:75%;
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <div>
     </div>
     <div runat="server" visible="false" id="divError">
             <asp:Label ID="lblError" runat="server" Text="" Visible="false" CssClass="w3-panel w3-red"/>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <asp:Button ID="btnPrint1" runat="server" Text="Imprimir" CssClass="submit" Width="100px" />
+                </td>
+                <td>
+                    <asp:Label ID="Label9" runat="server" Text="Es OBLIGATORIO imprimir y firmar los Atrasos" CssClass="w3-tiny w3-purple"/>
+                </td>
+            </tr>
+        </table>
     </div>
     <div>
         <asp:GridView ID="gvAtrasos" runat="server" AutoGenerateColumns="False"

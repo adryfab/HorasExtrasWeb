@@ -627,11 +627,11 @@ Public Class Registro
             If lbAprobado.Text = "True" Then 'SI Aprobado
                 imgEdit.Visible = False
                 imgDelete.Visible = False
-                BtnAdd.Visible = False
+                'BtnAdd.Visible = False
             Else 'NO Aprobado
                 imgEdit.Visible = True
                 imgDelete.Visible = True
-                BtnAdd.Visible = True
+                'BtnAdd.Visible = True
             End If
             'Cambia de color la fila si no es del biometrico (ingreso manual)
             Dim lblBio As Label = TryCast(e.Row.Cells(19).Controls(1), Label)

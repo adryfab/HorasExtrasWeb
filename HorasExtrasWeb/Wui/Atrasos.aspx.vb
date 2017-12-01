@@ -198,6 +198,10 @@
         End If
     End Sub
 
+    Protected Sub btnPrint1_Click(sender As Object, e As EventArgs) Handles btnPrint1.Click
+        Response.Redirect("~/Wui/ImprimirAtrasos.aspx")
+    End Sub
+
 #End Region
 
 End Class
