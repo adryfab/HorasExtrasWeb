@@ -83,7 +83,6 @@ Public Class Procesar
     End Sub
 
     Private Sub GenerarTotales()
-        'Dim SQLConexionBD As New SQLConexionBD()
         Dim SQLConexionBD As New HorasExtras.Wsl.Seguridad()
         Dim dsTotales As New DataSet
         Dim dtTotal050 As New DataTable
