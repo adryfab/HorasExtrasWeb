@@ -156,6 +156,7 @@
             End If
 
             If GrabarAtrasos(rows) = 1 Then 'OK
+                Llenar_Grid_Atrasos(rows.Item("CodigoEmp"))
                 Llenar_Grid()
             End If
         End If
