@@ -62,7 +62,7 @@
                         <asp:Label ID="DepartamentoId" runat="server" Text='<%#Bind("DepartamentoId") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Aprobado" ItemStyle-HorizontalAlign="Center">
+                <asp:TemplateField HeaderText="Aprobado" ItemStyle-HorizontalAlign="Center" Visible="false">
                     <ItemTemplate>
                         <asp:CheckBox ID="Aprobado" runat="server" checked='<%#Bind("Aprobado") %>' Enabled="false"/>
                     </ItemTemplate>
